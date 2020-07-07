@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Engineering Journal | MongoDB</title>
+  <meta property="og:title" content="Engineering Journal | MongoDB">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:type" content="website">
+  <meta name="description" content="Resource reference tables for HTML, CSS, JavaScript, and the MERN stack: MongoDB, Express, React, and Node.">
+  <meta property="og:image" content="assets/img/eat-sleep-code-repeat.png">
+  <meta property="og:description" content="Resource reference tables for HTML, CSS, JavaScript, and the MERN stack: MongoDB, Express, React, and Node.">
+  <meta name="twitter:image" content="assets/img/eat-sleep-code-repeat.png">
+  <meta name="twitter:description" content="Resource reference tables for HTML, CSS, JavaScript, and the MERN stack: MongoDB, Express, React, and Node.">
+  <meta name="twitter:title" content="Engineering Journal | MongoDB">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+  <!-- Start: Navbar -->
+  <nav class="navbar navbar-light navbar-expand-md navigation-clean">
+    <div class="container"><a class="navbar-brand" href="#">Engineering Journal</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse text-right"
+        id="navcol-1">
+        <ul class="nav navbar-nav ml-auto">
+          <li class="nav-item" role="presentation"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Topics&nbsp;</a>
+            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="html.html">HTML</a><a class="dropdown-item" role="presentation" href="css.html">CSS</a><a class="dropdown-item" role="presentation" href="javascript.html">JavaScript</a><a class="dropdown-item"
+                role="presentation" href="mongodb.html">MongoDB</a><a class="dropdown-item" role="presentation" href="express.html">Express</a><a class="dropdown-item" role="presentation" href="react.html">React</a><a class="dropdown-item"
+                role="presentation" href="node.html">Node</a></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End: Navbar -->
+  <main>
+    <!-- Start: Heading -->
+    <div class="container">
+      <div class="row page-title">
+        <div class="col text-center">
+          <h1 class="page-title">MongoDB</h1>
+        </div>
+      </div>
+    </div>
+    <!-- End: Heading -->
+    <!-- Start: Form -->
+    <section>
+      <div class="container">
+        <div class="row page-title">
+          <div class="col">
+            <form>
+              <div class="form-groups">
+                <div class="form-group flex-grow-1 flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1"><label for="description">Description</label><input class="form-control" type="text" id="description" name="description" placeholder="Summary"></div>
+                <div class="form-group flex-grow-1 keywords"><label for="keywords">Keywords</label><input class="form-control" type="text" id="keywords" name="keywords" placeholder="Comma separated"></div>
+                <div class="form-group flex-grow-1"><label for="link">Link</label><input class="form-control" type="text" id="link" name="link" placeholder="Full URL"></div>
+              </div><button class="btn btn-primary" type="button">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End: Form -->
+    <!-- Start: Table -->
+    <section class="table-section">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="table-responsive table-striped table-hover">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Description</th>
+                    <th>Keywords</th>
+                    <th>Link</th>
+                    <th class="text-center">Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Link</td>
+                    <td>One, Two, Three</td>
+                    <td><a href="#">developer.mozilla.org</a></td>
+                    <td class="d-flex justify-content-center align-items-center"><button class="btn btn-outline-primary btn-sm" type="button" style="width: 75px;">Edit</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End: Table -->
+  </main>
+  <!-- Start: Edit Modal -->
+  <div class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Resource</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="justify-content-center align-items-center">
+              <div class="form-group flex-grow-1 flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1"><label>Description</label><input class="form-control" type="text"></div>
+              <div class="form-group flex-grow-1"><label>Keywords</label><input class="form-control" type="text"></div>
+              <div class="form-group flex-grow-1"><label>Link</label><input class="form-control" type="text"></div>
+            </div><button class="btn btn-primary" type="button">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer"><button class="btn btn-danger" type="button">Delete</button></div>
+      </div>
+    </div>
+  </div>
+  <!-- End: Edit Modal -->
+  <footer class="text-center">
+    <p>&copy; 2020 Kenneth Warren</p>
+  </footer>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

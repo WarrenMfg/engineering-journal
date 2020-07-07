@@ -11,7 +11,7 @@ $(function() {
     type: 'GET',
     dataType: 'json',
     success: resources => {
-      // if no results, handle errors
+      // if no results, handle errors / provide feedback
       if (!resources.length) return handleErrors('No resouces yet.');
 
       // update results state
@@ -30,29 +30,18 @@ $(function() {
     const outerContainer = $('#error-feedback');
     const innerFlexContainer = $('#error-feedback-flex');
 
+    // append feedback to flexbox
     innerFlexContainer.append(para);
+    // display feedback
     outerContainer.slideDown('slow', () => {
+      // after 2 seconds, hide feedback
       setTimeout(() => {
         outerContainer.slideUp('slow', () => {
+          // remove feedback from DOM
           innerFlexContainer.empty();
         });
       }, 2000);
     });
-
-    // toggle error class
-    // const $userInput = $('#userInput');
-    // $userInput.toggleClass('userInputError');
-
-    // provide feedback
-    // setUserInput(feedback);
-    // $userInput.blur();
-
-    // reset input
-    // setTimeout(() => {
-    //   $userInput.toggleClass('userInputError');
-    //   setUserInput('');
-    //   $userInput.focus();
-    // }, 2000);
   };
 
   const populateDOM = resources => {
@@ -61,7 +50,10 @@ $(function() {
 
     // get domain from link
     const getDomain = link => {
+      // split domain
       let domain = link.split('//')[1].split('/')[0];
+
+      // if still contains 'www', then remove; return result either way
       if (/^www./.test(domain)) {
         return domain.split('www.')[1];
       } else {
@@ -76,7 +68,7 @@ $(function() {
           <td>${resource.description}</td>
           <td>${resource.keywords.join(', ')}</td>
           <td><a href="${resource.link}">${getDomain(resource.link)}</a></td>
-          <td class="d-flex justify-content-center align-items-center"><button class="btn btn-outline-primary btn-sm" type="button" style="width: 75px;">Edit</button></td>
+          <td class="d-flex justify-content-center align-items-center"><button class="btn btn-outline-primary btn-sm" type="button">Edit</button></td>
         </tr>`
       );
     });

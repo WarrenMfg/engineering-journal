@@ -20,8 +20,20 @@
   margin: 0;
 }
 
+.navbar-expand-md .navbar-nav .dropdown-menu {
+  text-align: right;
+}
+
 .row.page-title {
   margin-top: 2rem;
+}
+
+form label {
+  padding-left: 12px;
+}
+
+form .form-groups {
+  display: block;
 }
 
 .btn:not(:disabled):not(.disabled) {
@@ -37,16 +49,8 @@ section.table-section {
   vertical-align: middle;
 }
 
-form label {
-  padding-left: 12px;
-}
-
-.navbar-expand-md .navbar-nav .dropdown-menu {
-  text-align: right;
-}
-
-form .form-groups {
-  display: block;
+.btn-sm {
+  width: 75px;
 }
 
 footer p {

@@ -2,12 +2,9 @@ $(function() {
   // query heading
   const collection = $('h1.page-title').html();
 
-  // API URL
-  const url = `http://localhost:50000/api/resources/${collection}`;
-
   // AJAX
   $.ajax({
-    url,
+    url: `${API_URL}/api/resources/${collection}`,
     type: 'GET',
     dataType: 'json',
     success: resources => {
@@ -24,25 +21,6 @@ $(function() {
       handleErrors('Sorry, an error has occurred.');
     }
   });
-
-  const handleErrors = feedback => {
-    const para = `<p>${feedback}</p>`;
-    const outerContainer = $('#error-feedback');
-    const innerFlexContainer = $('#error-feedback-flex');
-
-    // append feedback to flexbox
-    innerFlexContainer.append(para);
-    // display feedback
-    outerContainer.slideDown('slow', () => {
-      // after 2 seconds, hide feedback
-      setTimeout(() => {
-        outerContainer.slideUp('slow', () => {
-          // remove feedback from DOM
-          innerFlexContainer.empty();
-        });
-      }, 2000);
-    });
-  };
 
   const populateDOM = resources => {
     // query tbody

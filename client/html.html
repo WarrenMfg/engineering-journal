@@ -57,12 +57,12 @@
       <div class="container">
         <div class="row page-title">
           <div class="col">
-            <form>
+            <form onsubmit="addResource(event)">
               <div class="form-groups">
                 <div class="form-group flex-grow-1 flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1"><label for="description">Description</label><input class="form-control" type="text" id="description" name="description" placeholder="Summary"></div>
                 <div class="form-group flex-grow-1 keywords"><label for="keywords">Keywords</label><input class="form-control" type="text" id="keywords" name="keywords" placeholder="Comma separated"></div>
                 <div class="form-group flex-grow-1"><label for="link">Link</label><input class="form-control" type="text" id="link" name="link" placeholder="Full URL"></div>
-              </div><button class="btn btn-primary" type="button">Submit</button>
+              </div><button class="btn btn-primary" type="submit">Submit</button>
             </form>
           </div>
         </div>
@@ -121,8 +121,12 @@
   </footer>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/purify.min.js"></script>
+  <script src="assets/js/API_URL.js"></script>
+  <script src="assets/js/handleErrors.js"></script>
   <script src="assets/js/onload.js"></script>
+  <script src="assets/js/purify.min.js"></script>
+  <script src="assets/js/validator.min.js"></script>
+  <script src="assets/js/addResource.js"></script>
 </body>
 
 </html>

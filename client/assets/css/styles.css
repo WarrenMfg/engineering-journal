@@ -57,6 +57,10 @@ footer p {
   margin: 0;
 }
 
+.modal {
+  background-color: rgba(0, 0, 0, 0.33);
+}
+
 @media (min-width: 768px) {
   .navbar-expand-md .navbar-nav .dropdown-menu {
     text-align: left;

@@ -49,6 +49,11 @@ $(function() {
     // show modal
     modal.toggle().addClass('show');
 
+    // add resource _id to modal submit button (needed in editResource.js)
+    modal.find('button[type=submit]').attr('data-id', e.target.id);
+    // add resource _id to modal delete button (needed in deleteResource.js)
+    modal.find('button[type=button]').attr('data-id', e.target.id);
+
     // get resource row
     const tableRow = $(e.target).parentsUntil('tbody').last();
     // get modal form inputs

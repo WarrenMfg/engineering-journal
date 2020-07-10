@@ -5,9 +5,11 @@ const addResource = e => {
   const description = $('#description');
   const keywords = $('#keywords');
   const link = $('#link');
+
   // query collection
   const collection = $('h1.page-title').html();
 
+  // validate inputs
   const validatedInputs = validateInputs(description.val().trim(), keywords.val().trim(), link.val().trim());
 
   if (!validatedInputs) return;
@@ -20,12 +22,14 @@ const addResource = e => {
     data: JSON.stringify(validatedInputs),
     dataType: 'json',
     success: resource => {
+      // handle error if empty array
+      if (!resource.length) return handleErrors('Sorry, an error has occurred.');
       // update table with new resource
       prependToTable(resource);
     },
     error: (xhr, errorType, exception) => {
       // log error
-      console.log('Onload error:', xhr, errorType, exception);
+      console.log('addResource error:', xhr, errorType, exception);
       // handle error
       handleErrors('Sorry, an error has occurred.');
     },

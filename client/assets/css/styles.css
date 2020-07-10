@@ -61,6 +61,10 @@ footer p {
   background-color: rgba(0, 0, 0, 0.33);
 }
 
+.modal-dialog {
+  margin-top: 10rem;
+}
+
 @media (min-width: 768px) {
   .navbar-expand-md .navbar-nav .dropdown-menu {
     text-align: left;

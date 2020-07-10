@@ -14,9 +14,9 @@ $(function() {
       // add resources to DOM
       appendToTable(resources);
     },
-    error: (xhr, errorType, exception) => {
+    error: (jqXHR, textStatus, errorThrown) => {
       // log error
-      console.log('Onload error:', xhr, errorType, exception);
+      console.log('Onload error:', jqXHR, textStatus, errorThrown);
       // handle error
       handleErrors('Sorry, an error has occurred.');
     }
@@ -40,6 +40,7 @@ $(function() {
     });
   };
 
+  // modal event listeners
   // query modal
   const modal = $('.modal');
 

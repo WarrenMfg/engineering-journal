@@ -41,6 +41,7 @@ const validateInputs = (description, keywords, link) => {
   }
 
   validKeywords = validKeywords.split(',').reduce((arr, keyword) => {
+    keyword = keyword.trim();
     if (keyword) arr.push(keyword);
     return arr;
   }, []);

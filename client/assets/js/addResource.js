@@ -23,7 +23,7 @@ const addResource = e => {
     dataType: 'json',
     success: resource => {
       // handle error if empty array
-      if (!resource.length) return handleErrors('Sorry, an error has occurred.');
+      if (!resource) return handleErrors('Sorry, an error has occurred.');
       // update table with new resource
       prependToTable(resource);
     },

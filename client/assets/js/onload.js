@@ -52,7 +52,7 @@ $(function() {
     // add resource _id to modal submit button (needed in editResource.js)
     modal.find('button[type=submit]').attr('data-id', e.target.id);
     // add resource _id to modal delete button (needed in deleteResource.js)
-    modal.find('button[type=button]').attr('data-id', e.target.id);
+    modal.find('.modal-footer button').attr('data-id', e.target.id);
 
     // get resource row
     const tableRow = $(e.target).parentsUntil('tbody').last();
@@ -72,7 +72,12 @@ $(function() {
   });
 
   // add event listener to modal close button
-  $('button.close').on('click', () => {
+  modal.find('button.close').on('click', () => {
     modal.toggle().removeClass('show');
+  });
+
+  // add event listener to modal delete button
+  modal.find('.modal-footer button').on('click', e => {
+    deleteResource(e);
   });
 });

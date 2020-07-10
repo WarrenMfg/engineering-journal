@@ -40,9 +40,19 @@ $(function() {
     });
   };
 
-  // modal event listeners
+  // MODAL EVENT LISTENERS
   // query modal
   const modal = $('.modal');
+
+  // toggle modal on escape
+  modal.on('keydown', e => {
+    if (e.key === 'Escape') modal.toggle().addClass('show');
+  });
+
+  // toggle modal on click off
+  modal.on('click', e => {
+    if (e.target.classList.contains('modal')) modal.toggle().addClass('show');
+  });
 
   // delegate Edit button clicks to table
   $('table').on('click', 'button', e => {

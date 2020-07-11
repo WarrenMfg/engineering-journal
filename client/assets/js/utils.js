@@ -4,24 +4,51 @@ DOMPurify.setConfig({ ALLOWED_TAGS: [] });
 // API URL
 const API_URL = 'http://localhost:50000';
 
+// timeoutID
+let timeoutID;
 // handle errors
 const handleErrors = feedback => {
   const para = `<p>${feedback}</p>`;
   const outerContainer = $('#error-feedback');
   const innerFlexContainer = $('#error-feedback-flex');
 
-  // append feedback to flexbox
-  innerFlexContainer.append(para);
-  // display feedback
-  outerContainer.slideDown('slow', () => {
-    // after 2 seconds, hide feedback
-    setTimeout(() => {
+  // if outerContainer is visible, then replace feedback
+  if (outerContainer.css('display') === 'block') {
+    // clear timeout
+    clearTimeout(timeoutID);
+
+    // remove/stop animation
+    outerContainer.stop(true, false);
+
+    // replace feedback
+    innerFlexContainer.find('p').text(feedback);
+
+    // animate
+    outerContainer.slideDown('slow');
+
+    // set new timeout
+    timeoutID = setTimeout(() => {
       outerContainer.slideUp('slow', () => {
         // remove feedback from DOM
         innerFlexContainer.empty();
       });
     }, 2000);
-  });
+
+    // otherwise, if not visible, add feedback
+  } else {
+    // append feedback to flexbox
+    innerFlexContainer.append(para);
+    // display feedback
+    outerContainer.slideDown('slow', () => {
+      // after 2 seconds, hide feedback
+      timeoutID = setTimeout(() => {
+        outerContainer.slideUp('slow', () => {
+          // remove feedback from DOM
+          innerFlexContainer.empty();
+        });
+      }, 2000);
+    });
+  }
 };
 
 // validate inputs

@@ -55,18 +55,18 @@ $(function() {
   modal.on('keydown', e => {
     if (e.key === 'Escape') {
       // hide modal
-      modal.toggle().addClass('show');
+      modal.toggle().removeClass('show');
 
       // unfreeze body
       unfreezeBody();
     }
   });
 
-  // toggle modal on click off
+  // toggle modal when click outside of modal
   modal.on('click', e => {
     if (e.target.classList.contains('modal')) {
       // hide modal
-      modal.toggle().addClass('show');
+      modal.toggle().removeClass('show');
 
       // unfreeze body
       unfreezeBody();

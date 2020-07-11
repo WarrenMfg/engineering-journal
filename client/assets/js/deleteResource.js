@@ -37,5 +37,23 @@ const deleteResource = e => {
 };
 
 const removeRow = id => {
-  $(`button#${id}`).closest('tr').remove();
+  // query table row
+  const tr = $(`button#${id}`).closest('tr');
+
+  // add css feedback
+  tr.css({ backgroundColor: 'pink' });
+
+  // animate 'td' element padding; wrap 'td' elements with divs
+  // NOTE: the last .children() method queries new div children
+  const divs = tr
+    .children()
+    .animate({ paddingTop: 0, paddingBottom: 0 })
+    .wrapInner('<div></div>')
+    .children();
+
+  // animate divs
+  divs.slideUp('fast', () => {
+    // remove entire table row from DOM
+    tr.remove();
+  });
 };

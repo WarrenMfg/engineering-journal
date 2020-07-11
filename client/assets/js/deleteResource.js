@@ -1,4 +1,7 @@
 const deleteResource = e => {
+  // toggle progress cursor and masking div
+  $('#mask').toggle();
+
   // query collection
   const collection = $('h1.page-title').html();
   const id = e.target.dataset.id;
@@ -23,6 +26,12 @@ const deleteResource = e => {
     complete: () => {
       // hide modal
       $('.modal').toggle().removeClass('show');
+
+      // toggle progress cursor and masking div
+      $('#mask').toggle();
+
+      // unfreeze body
+      unfreezeBody();
     }
   });
 };

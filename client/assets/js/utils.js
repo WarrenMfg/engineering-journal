@@ -74,3 +74,12 @@ const getHost = link => {
     return host;
   }
 };
+
+// unfreeze body
+const unfreezeBody = () => {
+  const body = $('body');
+  const scrollY = body.css('top');
+  body.css('top', '');
+  body.removeClass('freeze');
+  window.scrollTo(0, parseInt(scrollY) * -1);
+};

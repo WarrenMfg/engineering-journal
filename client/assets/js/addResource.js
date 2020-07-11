@@ -1,4 +1,8 @@
 const addResource = e => {
+  // toggle progress cursor and masking div
+  $('#mask').toggle();
+
+  // prevent default form behavior
   e.preventDefault();
 
   // query inputs
@@ -12,7 +16,10 @@ const addResource = e => {
   // validate inputs
   const validatedInputs = validateInputs(description.val().trim(), keywords.val().trim(), link.val().trim());
 
-  if (!validatedInputs) return;
+  if (!validatedInputs) {
+    // toggle progress cursor and masking div
+    return $('#mask').toggle();
+  }
 
   // AJAX
   $.ajax({
@@ -38,6 +45,9 @@ const addResource = e => {
       description.val('');
       keywords.val('');
       link.val('');
+
+      // toggle progress cursor and masking div
+      $('#mask').toggle();
     }
   });
 };

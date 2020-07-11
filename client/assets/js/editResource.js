@@ -1,4 +1,8 @@
 const editResource = e => {
+  // toggle progress cursor and masking div
+  $('#mask').toggle();
+
+  // prevent default form behavior
   e.preventDefault();
 
   // query inputs
@@ -39,6 +43,12 @@ const editResource = e => {
     complete: () => {
       // hide modal
       $('.modal').toggle().removeClass('show');
+
+      // toggle progress cursor and masking div
+      $('#mask').toggle();
+
+      // unfreeze body
+      unfreezeBody();
     }
   });
 };

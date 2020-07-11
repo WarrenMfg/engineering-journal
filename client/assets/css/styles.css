@@ -1,3 +1,8 @@
+.freeze {
+  position: fixed;
+  width: 100vw;
+}
+
 #error-feedback {
   display: none;
   position: fixed;
@@ -63,6 +68,18 @@ footer p {
 
 .modal-dialog {
   margin-top: 10rem;
+}
+
+#mask {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  cursor: progress;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 1100;
 }
 
 @media (min-width: 768px) {

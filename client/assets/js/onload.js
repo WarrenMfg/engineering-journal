@@ -1,4 +1,7 @@
 $(function() {
+  // toggle progress cursor and masking div
+  $('#mask').toggle();
+
   // query heading
   const collection = $('h1.page-title').html();
 
@@ -19,6 +22,10 @@ $(function() {
       console.log('Onload error:', jqXHR, textStatus, errorThrown);
       // handle error
       handleErrors('Sorry, an error has occurred.');
+    },
+    complete: () => {
+      // toggle progress cursor and masking div
+      $('#mask').toggle();
     }
   });
 
@@ -46,16 +53,41 @@ $(function() {
 
   // toggle modal on escape
   modal.on('keydown', e => {
-    if (e.key === 'Escape') modal.toggle().addClass('show');
+    if (e.key === 'Escape') {
+      // hide modal
+      modal.toggle().addClass('show');
+
+      // unfreeze body
+      unfreezeBody();
+    }
   });
 
   // toggle modal on click off
   modal.on('click', e => {
-    if (e.target.classList.contains('modal')) modal.toggle().addClass('show');
+    if (e.target.classList.contains('modal')) {
+      // hide modal
+      modal.toggle().addClass('show');
+
+      // unfreeze body
+      unfreezeBody();
+    }
   });
 
-  // delegate Edit button clicks to table
+  // add event listener to modal close button
+  modal.find('button.close').on('click', () => {
+    // hide modal
+    modal.toggle().removeClass('show');
+
+    // unfreeze body
+    unfreezeBody();
+  });
+
+  // delegate 'Edit' button clicks to table
   $('table').on('click', 'button', e => {
+    // freeze scroll
+    const scrollY = window.scrollY;
+    $('body').addClass('freeze').css('top', `-${scrollY}px`);
+
     // show modal
     modal.toggle().addClass('show');
 
@@ -79,11 +111,6 @@ $(function() {
 
     // focus on first input
     inputs.first().focus();
-  });
-
-  // add event listener to modal close button
-  modal.find('button.close').on('click', () => {
-    modal.toggle().removeClass('show');
   });
 
   // add event listener to modal delete button

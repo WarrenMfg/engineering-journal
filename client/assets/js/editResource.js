@@ -1,9 +1,9 @@
 const editResource = e => {
-  // toggle progress cursor and masking div
-  $('#mask').toggle();
-
   // prevent default form behavior
   e.preventDefault();
+
+  // toggle progress cursor and masking div
+  $('#mask').toggle();
 
   // query inputs
   const description = $('#modal-description');

@@ -26,6 +26,16 @@
   margin: 0;
 }
 
+li a.active,
+.dropdown-item.active,
+.dropdown-item:active {
+  font-weight: bold;
+}
+
+.dropdown-item.active.white {
+  color: white;
+}
+
 .navbar-expand-md .navbar-nav .dropdown-menu {
   text-align: right;
 }

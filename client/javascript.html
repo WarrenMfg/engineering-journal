@@ -28,7 +28,7 @@
         <ul class="nav navbar-nav ml-auto">
           <li class="nav-item" role="presentation"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Topics&nbsp;</a>
-            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="html.html">HTML</a><a class="dropdown-item" role="presentation" href="css.html">CSS</a><a class="dropdown-item" role="presentation" href="javascript.html">JavaScript</a><a class="dropdown-item"
+            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="html.html">HTML</a><a class="dropdown-item" role="presentation" href="css.html">CSS</a><a class="dropdown-item active white" role="presentation" href="javascript.html">JavaScript</a><a class="dropdown-item"
                 role="presentation" href="mongodb.html">MongoDB</a><a class="dropdown-item" role="presentation" href="express.html">Express</a><a class="dropdown-item" role="presentation" href="react.html">React</a><a class="dropdown-item"
                 role="presentation" href="node.html">Node</a></div>
           </li>
@@ -37,6 +37,11 @@
     </div>
   </nav>
   <!-- End: Navbar -->
+  <!-- Start: Error Feedback -->
+  <div id="error-feedback">
+    <div id="error-feedback-flex"></div>
+  </div>
+  <!-- End: Error Feedback -->
   <main>
     <!-- Start: Heading -->
     <div class="container">
@@ -52,12 +57,12 @@
       <div class="container">
         <div class="row page-title">
           <div class="col">
-            <form>
+            <form onsubmit="addResource(event)">
               <div class="form-groups">
                 <div class="form-group flex-grow-1 flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1"><label for="description">Description</label><input class="form-control" type="text" id="description" name="description" placeholder="Summary"></div>
                 <div class="form-group flex-grow-1 keywords"><label for="keywords">Keywords</label><input class="form-control" type="text" id="keywords" name="keywords" placeholder="Comma separated"></div>
                 <div class="form-group flex-grow-1"><label for="link">Link</label><input class="form-control" type="text" id="link" name="link" placeholder="Full URL"></div>
-              </div><button class="btn btn-primary" type="button">Submit</button>
+              </div><button class="btn btn-primary" type="submit">Submit</button>
             </form>
           </div>
         </div>
@@ -80,12 +85,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Link</td>
-                    <td>One, Two, Three</td>
-                    <td><a href="#">developer.mozilla.org</a></td>
-                    <td class="d-flex justify-content-center align-items-center"><button class="btn btn-outline-primary btn-sm" type="button" style="width: 75px;">Edit</button></td>
-                  </tr>
+                  <!-- Resources go here -->
                 </tbody>
               </table>
             </div>
@@ -103,12 +103,12 @@
           <h4 class="modal-title">Edit Resource</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form onsubmit="editResource(event)">
             <div class="justify-content-center align-items-center">
-              <div class="form-group flex-grow-1 flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1"><label>Description</label><input class="form-control" type="text"></div>
-              <div class="form-group flex-grow-1"><label>Keywords</label><input class="form-control" type="text"></div>
-              <div class="form-group flex-grow-1"><label>Link</label><input class="form-control" type="text"></div>
-            </div><button class="btn btn-primary" type="button">Submit</button>
+              <div class="form-group flex-grow-1 flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1"><label for="modal-description">Description</label><input class="form-control" type="text" id="modal-description" name="modal-description" placeholder="Summary"></div>
+              <div class="form-group flex-grow-1"><label for="modal-keywords">Keywords</label><input class="form-control" type="text" id="modal-keywords" name="modal-keywords" placeholder="Comma separated"></div>
+              <div class="form-group flex-grow-1"><label for="modal-link">Link</label><input class="form-control" type="text" id="modal-link" name="modal-link" placeholder="Full URL"></div>
+            </div><button class="btn btn-primary" type="submit">Submit</button>
           </form>
         </div>
         <div class="modal-footer"><button class="btn btn-danger" type="button">Delete</button></div>
@@ -119,8 +119,17 @@
   <footer class="text-center">
     <p>&copy; 2020 Kenneth Warren</p>
   </footer>
+  <!-- Masking DIV -->
+  <div id="mask"></div>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/purify.min.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/onload.js"></script>
+  <script src="assets/js/validator.min.js"></script>
+  <script src="assets/js/addResource.js"></script>
+  <script src="assets/js/editResource.js"></script>
+  <script src="assets/js/deleteResource.js"></script>
 </body>
 
 </html>

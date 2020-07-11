@@ -47,6 +47,11 @@ $(function() {
     });
   };
 
+  // #ERROR-FEEDBACK EVENT LISTENER
+  $('#error-feedback').on('click', e => {
+    $(e.target).closest('#error-feedback').css('display', 'none');
+  });
+
   // MODAL EVENT LISTENERS
   // query modal
   const modal = $('.modal');

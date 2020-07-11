@@ -1,5 +1,5 @@
 const deleteResource = e => {
-  // toggle progress cursor and masking div
+  // toggle progress cursor and masking div on
   $('#mask').toggle();
 
   // query collection
@@ -27,7 +27,7 @@ const deleteResource = e => {
       // hide modal
       $('.modal').toggle().removeClass('show');
 
-      // toggle progress cursor and masking div
+      // toggle progress cursor and masking div off
       $('#mask').toggle();
 
       // unfreeze body

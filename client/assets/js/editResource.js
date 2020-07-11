@@ -2,7 +2,7 @@ const editResource = e => {
   // prevent default form behavior
   e.preventDefault();
 
-  // toggle progress cursor and masking div
+  // toggle progress cursor and masking div on
   $('#mask').toggle();
 
   // query inputs
@@ -10,16 +10,17 @@ const editResource = e => {
   const keywords = $('#modal-keywords');
   const link = $('#modal-link');
 
-  // query collection
-  const collection = $('h1.page-title').html();
-
-  // query resource _id (added from onload.js)
-  const id = $('.modal button[type=submit]').attr('data-id');
-
   // validate inputs
   const validatedInputs = validateInputs(description.val().trim(), keywords.val().trim(), link.val().trim());
 
-  if (!validatedInputs) return;
+  // toggle progress cursor and masking div off
+  if (!validatedInputs) return $('#mask').toggle();
+
+  // query collection
+  const collection = $('h1.page-title').html();
+
+  // query resource _id (added from onload.js table click delegation)
+  const id = $('.modal button[type=submit]').attr('data-id');
 
   // AJAX
   $.ajax({
@@ -44,7 +45,7 @@ const editResource = e => {
       // hide modal
       $('.modal').toggle().removeClass('show');
 
-      // toggle progress cursor and masking div
+      // toggle progress cursor and masking div off
       $('#mask').toggle();
 
       // unfreeze body
@@ -54,6 +55,8 @@ const editResource = e => {
 };
 
 const updateRow = (id, resource) => {
+  // find row of button id; update innerText of 'td' elements,
+  // and update innerText and href of 'a' element
   $(`button#${id}`).parentsUntil('tbody').last().children().each((i, tableData) => {
     if (i === 0) {
       tableData.innerText = resource.description;

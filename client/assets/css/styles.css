@@ -10,6 +10,7 @@
   left: 0;
   width: 100%;
   background-color: pink;
+  z-index: 1101;
 }
 
 #error-feedback-flex {
@@ -78,7 +79,7 @@ footer p {
   top: 0;
   left: 0;
   cursor: progress;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0);
   z-index: 1100;
 }
 

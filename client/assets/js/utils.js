@@ -49,7 +49,7 @@ const validateInputs = (description, keywords, link) => {
   // validate link
   const validLink = DOMPurify.sanitize(link);
   if (!validator.isURL(validLink)) {
-    handleErrors('Please inlcude a valid link.');
+    handleErrors('Please include a valid link.');
     return;
   }
 

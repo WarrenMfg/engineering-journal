@@ -1,5 +1,5 @@
 $(function() {
-  // toggle progress cursor and masking div
+  // toggle progress cursor and masking div on
   $('#mask').toggle();
 
   // query heading
@@ -24,7 +24,7 @@ $(function() {
       handleErrors('Sorry, an error has occurred.');
     },
     complete: () => {
-      // toggle progress cursor and masking div
+      // toggle progress cursor and masking div off
       $('#mask').toggle();
     }
   });
@@ -63,7 +63,7 @@ $(function() {
   });
 
   // toggle modal when click outside of modal
-  modal.on('click', e => {
+  modal.on('mousedown', e => {
     if (e.target.classList.contains('modal')) {
       // hide modal
       modal.toggle().removeClass('show');

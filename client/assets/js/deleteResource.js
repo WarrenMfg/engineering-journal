@@ -37,5 +37,5 @@ const deleteResource = e => {
 };
 
 const removeRow = id => {
-  $(`button#${id}`).parentsUntil('tbody').last().remove();
+  $(`button#${id}`).closest('tr').remove();
 };

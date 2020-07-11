@@ -57,7 +57,7 @@ const editResource = e => {
 const updateRow = (id, resource) => {
   // find row of button id; update innerText of 'td' elements,
   // and update innerText and href of 'a' element
-  $(`button#${id}`).parentsUntil('tbody').last().children().each((i, tableData) => {
+  $(`button#${id}`).closest('tr').children().each((i, tableData) => {
     if (i === 0) {
       tableData.innerText = resource.description;
     } else if (i === 1) {

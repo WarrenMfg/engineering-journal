@@ -97,7 +97,7 @@ $(function() {
     modal.find('.modal-footer button').attr('data-id', e.target.id);
 
     // get resource row
-    const tableRow = $(e.target).parentsUntil('tbody').last();
+    const tableRow = $(e.target).closest('tr');
     // get modal form inputs
     const inputs = $('.modal .form-control');
     // populate inputs with resource to be edited

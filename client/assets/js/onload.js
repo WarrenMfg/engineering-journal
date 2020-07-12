@@ -120,6 +120,6 @@ $(function() {
 
   // add event listener to modal delete button
   modal.find('.modal-footer button').on('click', e => {
-    deleteResource(e);
+    if (confirm('Are you sure?')) deleteResource(e);
   });
 });

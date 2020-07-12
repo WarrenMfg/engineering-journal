@@ -62,11 +62,13 @@ const prependToTable = resource => {
   const tbody = $('tbody');
 
   tbody.prepend(
-    `<tr>
-      <td>${resource.description}</td>
-      <td>${resource.keywords.join(', ')}</td>
-      <td><a href="${resource.link}" target="_blank">${getHost(resource.link)}</a></td>
-      <td><button class="btn btn-outline-primary btn-sm" type="button" id=${resource._id}>Edit</button></td>
-    </tr>`
+    tableRow(
+      '',
+      resource.createdAt,
+      resource.description,
+      resource.keywords,
+      resource.link,
+      resource._id
+    )
   );
 };

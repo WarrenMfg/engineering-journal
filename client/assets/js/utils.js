@@ -102,6 +102,15 @@ const getHost = link => {
   }
 };
 
+const tableRow = (className = '', createdAt, description, keywords, link, _id) => `
+  <tr class="${className}" data-createdat=${createdAt}>
+    <td>${description}</td>
+    <td>${keywords.join(', ')}</td>
+    <td><a href="${link}" target="_blank">${getHost(link)}</a></td>
+    <td><button class="btn btn-outline-primary btn-sm" type="button" id=${_id}>Edit</button></td>
+  </tr>
+`;
+
 // unfreeze body
 const unfreezeBody = () => {
   const body = $('body');

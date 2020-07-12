@@ -61,8 +61,20 @@ section.table-section {
   margin-top: 2rem;
 }
 
-table.table tr:hover {
-  background-color: #e6ffff;
+table.table tbody:hover {
+  cursor: pointer;
+}
+
+table.table tr:hover:not(.pin) {
+  background-color: #e9f0fc;
+}
+
+table.table tr.pin {
+  background-color: #e6f8e4;
+}
+
+table.table tr.pin:hover {
+  background-color: #cef3ca;
 }
 
 .table td,

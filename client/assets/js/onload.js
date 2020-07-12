@@ -162,19 +162,24 @@ $(function() {
 
   // pin and unpin items
   table.on('click', 'tr', e => {
+    // assign target
+    const target = $(e.target);
+
     // return if clicked on link
-    if (e.target.tagName === 'A') return;
+    if (target.prop('tagName') === 'A') return;
+    // return if clicked on thead
+    if (target.closest('thead').length) return;
 
     // query collection
     const collection = $('h1.page-title').html();
     // query tr and resource button#id
-    const tr = $(e.target).closest('tr');
+    const tr = target.closest('tr');
     const id = tr.find('button').attr('id');
 
     // toggle progress cursor and masking div on
     $('#mask').toggle();
 
-    // if tr has classname 'pin' then unpin
+    // if tr has classname 'pin' then remove-pin
     if (tr.hasClass('pin')) {
       $.ajax({
         url: `${API_URL}/api/resource/remove-pin/${collection}/${id}`,
@@ -184,12 +189,12 @@ $(function() {
           // if no result, handle errors / provide feedback
           if (!resource) return handleErrors('Could not unpin resource.');
 
-          // query tr without pin class
+          // query tr without pin class and
           const notPinned = tr.closest('tbody').children(':not(.pin)');
           // iterate to find placement of tr
           notPinned.each(function() {
             if (tr.data('createdat') > $(this).data('createdat')) {
-              // insert tr before the current table row because it was created later than current table row
+              // insert tr before the current table row because it was created later than current table row, but before others above it
               tr.removeClass('pin').insertBefore($(this));
               return false;
 
@@ -198,7 +203,6 @@ $(function() {
               tr.removeClass('pin').insertAfter($(this));
             }
           });
-          // insert according to data-createdat
         },
         error: (jqXHR, textStatus, errorThrown) => {
           // log error
@@ -212,7 +216,7 @@ $(function() {
         }
       });
 
-      // otherwise pin
+      // otherwise add-pin
     } else {
       $.ajax({
         url: `${API_URL}/api/resource/add-pin/${collection}/${id}`,
@@ -222,7 +226,7 @@ $(function() {
           // if no result, handle errors / provide feedback
           if (!resource) return handleErrors('Could not pin resource.');
 
-          // move tr (.after() will move tr instead of clone it)
+          // move tr (will be moved, not cloned)
           const pins = tr.closest('tbody').children('.pin');
           if (pins.length) {
             tr.addClass('pin').insertAfter(pins);

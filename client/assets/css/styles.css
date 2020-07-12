@@ -70,11 +70,11 @@ table.table tr:hover:not(.pin) {
 }
 
 table.table tr.pin {
-  background-color: #e6f8e4;
+  background-color: #ebfce9;
 }
 
 table.table tr.pin:hover {
-  background-color: #cef3ca;
+  background-color: #d4f5d1;
 }
 
 .table td,

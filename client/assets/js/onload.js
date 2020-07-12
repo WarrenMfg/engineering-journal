@@ -165,20 +165,53 @@ $(function() {
     // return if clicked on link
     if (e.target.tagName === 'A') return;
 
-    // make target a jquery object
-    const target = $(e.target);
     // query collection
     const collection = $('h1.page-title').html();
     // query tr and resource button#id
-    const tr = target.closest('tr');
+    const tr = $(e.target).closest('tr');
     const id = tr.find('button').attr('id');
 
     // toggle progress cursor and masking div on
     $('#mask').toggle();
 
-    // if target has classname 'pin' then unpin
-    if (target.hasClass('pin')) {
-      // TODO
+    // if tr has classname 'pin' then unpin
+    if (tr.hasClass('pin')) {
+      $.ajax({
+        url: `${API_URL}/api/resource/remove-pin/${collection}/${id}`,
+        type: 'PUT',
+        dataType: 'json',
+        success: resource => {
+          // if no result, handle errors / provide feedback
+          if (!resource) return handleErrors('Could not unpin resource.');
+
+          // query tr without pin class
+          const notPinned = tr.closest('tbody').children(':not(.pin)');
+          // iterate to find placement of tr
+          notPinned.each(function() {
+            if (tr.data('createdat') > $(this).data('createdat')) {
+              // insert tr before the current table row because it was created later than current table row
+              tr.removeClass('pin').insertBefore($(this));
+              return false;
+
+              // last table row
+            } else {
+              tr.removeClass('pin').insertAfter($(this));
+            }
+          });
+          // insert according to data-createdat
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+          // log error
+          console.log('Onload error:', jqXHR, textStatus, errorThrown);
+          // handle error
+          handleErrors('Sorry, an error has occurred.');
+        },
+        complete: () => {
+          // toggle progress cursor and masking div off
+          $('#mask').toggle();
+        }
+      });
+
       // otherwise pin
     } else {
       $.ajax({
@@ -190,7 +223,12 @@ $(function() {
           if (!resource) return handleErrors('Could not pin resource.');
 
           // move tr (.after() will move tr instead of clone it)
-          $('.pin').last().after(tr.addClass('pin'));
+          const pins = tr.closest('tbody').children('.pin');
+          if (pins.length) {
+            tr.addClass('pin').insertAfter(pins);
+          } else {
+            tr.closest('tbody').prepend(tr.addClass('pin'));
+          }
         },
         error: (jqXHR, textStatus, errorThrown) => {
           // log error

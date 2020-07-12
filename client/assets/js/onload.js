@@ -41,7 +41,7 @@ $(function() {
           <td>${resource.description}</td>
           <td>${resource.keywords.join(', ')}</td>
           <td><a href="${resource.link}" target="_blank">${getHost(resource.link)}</a></td>
-          <td class="d-flex justify-content-center align-items-center"><button class="btn btn-outline-primary btn-sm" type="button" id=${resource._id}>Edit</button></td>
+          <td><button class="btn btn-outline-primary btn-sm" type="button" id=${resource._id}>Edit</button></td>
         </tr>`
       );
     });

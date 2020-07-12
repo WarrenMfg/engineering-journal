@@ -61,6 +61,10 @@ section.table-section {
   margin-top: 2rem;
 }
 
+table.table tr:hover {
+  background-color: #e6ffff;
+}
+
 .table td,
 .table th {
   vertical-align: middle;

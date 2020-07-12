@@ -11,7 +11,11 @@ const addResource = e => {
   const link = $('#link');
 
   // validate inputs
-  const validatedInputs = validateInputs(description.val().trim(), keywords.val().trim(), link.val().trim());
+  const validatedInputs = validateInputs(
+    description.val().trim(),
+    keywords.val().trim(),
+    link.val().trim()
+  );
 
   // toggle progress cursor and masking div off
   if (!validatedInputs) return $('#mask').toggle();
@@ -62,7 +66,7 @@ const prependToTable = resource => {
       <td>${resource.description}</td>
       <td>${resource.keywords.join(', ')}</td>
       <td><a href="${resource.link}" target="_blank">${getHost(resource.link)}</a></td>
-      <td class="d-flex justify-content-center align-items-center"><button class="btn btn-outline-primary btn-sm" type="button" id=${resource._id}>Edit</button></td>
+      <td><button class="btn btn-outline-primary btn-sm" type="button" id=${resource._id}>Edit</button></td>
     </tr>`
   );
 };

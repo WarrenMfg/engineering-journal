@@ -229,7 +229,8 @@ $(function() {
           // move tr (will be moved, not cloned)
           const pins = tr.closest('tbody').children('.pin');
           if (pins.length) {
-            tr.addClass('pin').insertAfter(pins);
+            tr.addClass('pin');
+            pins.last().after(tr);
           } else {
             tr.closest('tbody').prepend(tr.addClass('pin'));
           }

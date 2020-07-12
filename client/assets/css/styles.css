@@ -62,7 +62,7 @@ section.table-section {
 }
 
 table.table tbody:hover {
-  cursor: pointer;
+  cursor: url('pin.png') 0 8, pointer;
 }
 
 table.table tr:hover:not(.pin) {
@@ -105,7 +105,7 @@ footer p {
   height: 100vh;
   top: 0;
   left: 0;
-  cursor: progress;
+  cursor: wait;
   background-color: rgba(0, 0, 0, 0);
   z-index: 1100;
 }

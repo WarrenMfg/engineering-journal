@@ -140,3 +140,41 @@ const unfreezeBody = () => {
   body.removeClass('freeze');
   window.scrollTo(0, parseInt(scrollY) * -1);
 };
+
+// filter function
+// this function will be invoked when typing stops in filter input
+// or when filtered, and adding a new resource
+
+// query tbody (onload tbody.children.length will be zero)
+const tbody = $('table tbody');
+// query .table-hover to remove .table-striped when filtering
+const tableHover = $('.table-hover');
+
+// define filter function
+const filterTableRows = function(e) {
+  // if trying to filter
+  if (e.target.value) {
+    // remove striped background color
+    tableHover.removeClass('table-striped');
+    // otherwise, filter input is empty, so add striped background color
+  } else {
+    tableHover.addClass('table-striped');
+  }
+
+  // iterate over 'tr' elements
+  tbody.children().each(function() {
+    // iterate over 'td 'elements
+    $(this).children().each(function() {
+      // if no children or child is an 'a' element
+      if (!$(this).children().length || $(this).children('a').length) {
+        // if filter matches text
+        if ($(this).text().toLowerCase().includes(e.target.value.toLowerCase())) {
+          $(this).closest('tr').show();
+          return false;
+        } else {
+          $(this).closest('tr').hide();
+        }
+      }
+    });
+  });
+};

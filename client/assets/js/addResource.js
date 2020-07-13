@@ -91,4 +91,9 @@ const prependToTable = resource => {
       )
     );
   }
+
+  // if currently filtering, run filter
+  // query filter input
+  const filterInputValue = $('#filter').val();
+  if (filterInputValue) filterTableRows({ target: { value: filterInputValue } });
 };

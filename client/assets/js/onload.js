@@ -65,7 +65,7 @@ $(function() {
     if (order) prependToTable(tbody, order, pins);
   };
 
-  const prependToTable = (tbody = $('tbody'), order, pins) => {
+  const prependToTable = (tbody, order, pins) => {
     tbody.prepend(() => {
       let html;
       // iterate through order array to find in pins array
@@ -80,8 +80,10 @@ $(function() {
 
   /* END FETCH DATA ON LOAD */
   /* START SEARCH MODAL EVENT LISTENERS */
+
   // invoke searchModal function
   searchModal();
+
   /* END SEARCH MODAL EVENT LISTENERS */
   /* START EDIT MODAL EVENT LISTENERS */
 
@@ -256,4 +258,31 @@ $(function() {
   $('#error-feedback').on('click', e => {
     $(e.target).closest('#error-feedback').css('display', 'none');
   });
+
+  /* END TABLE & ERROR FEEDBACK EVENT LISTENERS */
+  /* START FILTER EVENT LISTENERS */
+
+  // query filter input
+  const filterInput = $('#filter');
+
+  // define debounce function
+  const debounce = (func, delay) => {
+    let timeoutID;
+
+    // this function will be invoked by filter input event listener
+    return function(event) {
+      const action = () => {
+        timeoutID = null;
+        func.call(this, event);
+      };
+
+      clearTimeout(timeoutID);
+      timeoutID = setTimeout(action, delay);
+    };
+  };
+
+  // add filter event listener
+  filterInput.on('input', debounce(filterTableRows, 300));
+
+  /* END FILTER EVENT LISTENERS */
 });

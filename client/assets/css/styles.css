@@ -33,12 +33,21 @@ li a.active,
   font-weight: bold;
 }
 
+.dropdown-menu {
+  height: 298px;
+  overflow-y: scroll;
+}
+
 .dropdown-item.active.white {
   color: white;
 }
 
 .navbar-expand-md .navbar-nav .dropdown-menu {
   text-align: right;
+}
+
+#new-topic-name {
+  display: none;
 }
 
 .row.page-title {

@@ -11,12 +11,24 @@ $(function() {
     url: `${API_URL}/api/resources/${localStorage.password}/${collection}`,
     type: 'GET',
     dataType: 'json',
-    success: resources => {
+    success: data => {
+      // populate dropdown menu for topics
+      const dropdownMenu = $('.dropdown-menu');
+      // sort namespaces
+      data.namespaces.sort();
+      // add to dropdown menu
+      data.namespaces.forEach(ns => {
+        dropdownMenu.append(
+          `<a class="dropdown-item ${ns === collection &&
+            'active'}" role="presentation" href="${ns.toLowerCase()}.html">${ns}</a>`
+        );
+      });
+
       // if no results, handle errors / provide feedback
-      if (!resources.length) return handleErrors('No resouces yet.');
+      if (!data.docs.length) return handleErrors('No resouces yet.');
 
       // add resources to DOM
-      appendToTable(resources);
+      appendToTable(data.docs);
     },
     error: (jqXHR, textStatus, errorThrown) => {
       // log error
@@ -285,4 +297,23 @@ $(function() {
   filterInput.on('input', debounce(filterTableRows, 300));
 
   /* END FILTER EVENT LISTENERS */
+  /* START ADD TOPIC EVENT LISTENERS */
+  // query add topic from dropdown menu
+  const addTopic = $('#add-topic');
+
+  // query new topic name input field
+  const newTopicName = $('#new-topic-name');
+
+  // add on click event listener
+  addTopic.on('click', () => {
+    filterInput.hide();
+    newTopicName.show().focus();
+  });
+
+  // add on blur event listener
+  // add on blur event listener
+  newTopicName.on('blur', function() {
+    $(this).hide();
+    filterInput.show();
+  });
 });

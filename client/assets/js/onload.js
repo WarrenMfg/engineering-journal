@@ -3,7 +3,6 @@ $(function() {
   $('#mask').toggle();
 
   /* START FETCH DATA ON LOAD */
-
   // query heading
   const collection = $('h1.page-title').html();
 
@@ -80,48 +79,52 @@ $(function() {
   };
 
   /* END FETCH DATA ON LOAD */
-  /* START MODAL EVENT LISTENERS */
+  /* START SEARCH MODAL EVENT LISTENERS */
+  // invoke searchModal function
+  searchModal();
+  /* END SEARCH MODAL EVENT LISTENERS */
+  /* START EDIT MODAL EVENT LISTENERS */
 
-  // query modal
-  const modal = $('.modal');
+  // query edit modal
+  const editModal = $('.modal.edit');
 
-  // toggle modal on escape
-  modal.on('keydown', e => {
+  // toggle edit modal on escape
+  editModal.on('keydown', e => {
     if (e.key === 'Escape') {
-      // hide modal
-      modal.toggle().removeClass('show');
+      // hide edit modal
+      editModal.toggle().removeClass('show');
 
       // unfreeze body
       unfreezeBody();
     }
   });
 
-  // toggle modal when click outside of modal
-  modal.on('mousedown', e => {
+  // toggle edit modal when click outside of edit modal
+  editModal.on('mousedown', e => {
     if (e.target.classList.contains('modal')) {
-      // hide modal
-      modal.toggle().removeClass('show');
+      // hide edit modal
+      editModal.toggle().removeClass('show');
 
       // unfreeze body
       unfreezeBody();
     }
   });
 
-  // add event listener to modal close button
-  modal.find('button.close').on('click', () => {
-    // hide modal
-    modal.toggle().removeClass('show');
+  // add event listener to edit modal close button
+  editModal.find('button.close').on('click', () => {
+    // hide edit modal
+    editModal.toggle().removeClass('show');
 
     // unfreeze body
     unfreezeBody();
   });
 
-  // add event listener to modal delete button
-  modal.find('.modal-footer button').on('click', e => {
+  // add event listener to edit modal delete button
+  editModal.find('.modal-footer button').on('click', e => {
     if (confirm('Are you sure?')) deleteResource(e);
   });
 
-  /* END MODAL EVENT LISTENERS */
+  /* END EDIT MODAL EVENT LISTENERS */
   /* START TABLE & ERROR FEEDBACK EVENT LISTENERS */
 
   // delegate 'Edit' button clicks to table
@@ -135,18 +138,18 @@ $(function() {
     const scrollY = window.scrollY;
     $('body').addClass('freeze').css('top', `-${scrollY}px`);
 
-    // show modal
-    modal.toggle().addClass('show');
+    // show edit modal
+    editModal.toggle().addClass('show');
 
-    // add resource _id to modal submit button (needed in editResource.js)
-    modal.find('button[type=submit]').attr('data-id', e.target.id);
-    // add resource _id to modal delete button (needed in deleteResource.js)
-    modal.find('.modal-footer button').attr('data-id', e.target.id);
+    // add resource _id to edit modal submit button (needed in editResource.js)
+    editModal.find('button[type=submit]').attr('data-id', e.target.id);
+    // add resource _id to edit modal delete button (needed in deleteResource.js)
+    editModal.find('.modal-footer button').attr('data-id', e.target.id);
 
     // get resource row
     const tableRow = $(e.target).closest('tr');
-    // get modal form inputs
-    const inputs = $('.modal .form-control');
+    // get edit modal form inputs
+    const inputs = $('.modal.edit .form-control');
     // populate inputs with resource to be edited
     tableRow.children().each((i, tableData) => {
       if (i <= 1) {

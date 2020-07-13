@@ -11,14 +11,14 @@ const addResource = e => {
   const link = $('#link');
 
   // validate inputs
-  const validatedInputs = validateInputs(
+  const validatedResourceInputs = validateResourceInputs(
     description.val().trim(),
     keywords.val().trim(),
     link.val().trim()
   );
 
   // toggle progress cursor and masking div off
-  if (!validatedInputs) return $('#mask').toggle();
+  if (!validatedResourceInputs) return $('#mask').toggle();
 
   // query collection
   const collection = $('h1.page-title').html();
@@ -28,7 +28,7 @@ const addResource = e => {
     url: `${API_URL}/api/resource/${collection}`,
     type: 'POST',
     contentType: 'application/json',
-    data: JSON.stringify(validatedInputs),
+    data: JSON.stringify(validatedResourceInputs),
     dataType: 'json',
     success: resource => {
       // handle error if empty array

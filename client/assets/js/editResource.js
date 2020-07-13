@@ -11,23 +11,27 @@ const editResource = e => {
   const link = $('#modal-link');
 
   // validate inputs
-  const validatedInputs = validateInputs(description.val().trim(), keywords.val().trim(), link.val().trim());
+  const validatedResourceInputs = validateResourceInputs(
+    description.val().trim(),
+    keywords.val().trim(),
+    link.val().trim()
+  );
 
   // toggle progress cursor and masking div off
-  if (!validatedInputs) return $('#mask').toggle();
+  if (!validatedResourceInputs) return $('#mask').toggle();
 
   // query collection
   const collection = $('h1.page-title').html();
 
   // query resource _id (added from onload.js table click delegation)
-  const id = $('.modal button[type=submit]').attr('data-id');
+  const id = $('.modal.edit button[type=submit]').attr('data-id');
 
   // AJAX
   $.ajax({
     url: `${API_URL}/api/resource/${collection}/${id}`,
     type: 'PUT',
     contentType: 'application/json',
-    data: JSON.stringify(validatedInputs),
+    data: JSON.stringify(validatedResourceInputs),
     dataType: 'json',
     success: resource => {
       // handle error if no resource
@@ -43,7 +47,7 @@ const editResource = e => {
     },
     complete: () => {
       // hide modal
-      $('.modal').toggle().removeClass('show');
+      $('.modal.edit').toggle().removeClass('show');
 
       // toggle progress cursor and masking div off
       $('#mask').toggle();

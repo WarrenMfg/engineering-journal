@@ -25,7 +25,7 @@ const deleteResource = e => {
     },
     complete: () => {
       // hide modal
-      $('.modal').toggle().removeClass('show');
+      $('.modal.edit').toggle().removeClass('show');
 
       // toggle progress cursor and masking div off
       $('#mask').toggle();

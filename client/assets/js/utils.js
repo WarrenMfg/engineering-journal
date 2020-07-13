@@ -51,8 +51,8 @@ const handleErrors = feedback => {
   }
 };
 
-// validate inputs
-const validateInputs = (description, keywords, link) => {
+// validate resource inputs
+const validateResourceInputs = (description, keywords, link) => {
   // validate description
   const validDescription = DOMPurify.sanitize(description);
   if (!validDescription) {
@@ -80,12 +80,33 @@ const validateInputs = (description, keywords, link) => {
     return;
   }
 
-  // return validatedInputs
+  // return validatedResourceInputs
   return {
     description: validDescription,
     keywords: validKeywords,
     link: validLink,
     createdAt: Date.now()
+  };
+};
+
+const validateSearchInputs = (search, site) => {
+  // validate search
+  const validSearch = DOMPurify.sanitize(search);
+  if (!validSearch) {
+    handleErrors('Please include a valid search input.');
+    return;
+  }
+
+  // validate site
+  const validSite = DOMPurify.sanitize(site);
+  if (!validSite) {
+    handleErrors('Please include a valid site input.');
+    return;
+  }
+
+  return {
+    validSearch,
+    validSite
   };
 };
 

@@ -144,6 +144,7 @@ const unfreezeBody = () => {
 // filter function
 // this function will be invoked when typing stops in filter input
 // or when filtered, and adding a new resource
+// or when filtered, and making an edit to a resource
 
 // query tbody (onload tbody.children.length will be zero)
 const tbody = $('table tbody');
@@ -152,8 +153,10 @@ const tableHover = $('.table-hover');
 
 // define filter function
 const filterTableRows = function(e) {
+  // sanitize
+  const sanitized = DOMPurify.sanitize(e.target.value).toLowerCase();
   // if trying to filter
-  if (e.target.value) {
+  if (sanitized) {
     // remove striped background color
     tableHover.removeClass('table-striped');
     // otherwise, filter input is empty, so add striped background color
@@ -168,10 +171,13 @@ const filterTableRows = function(e) {
       // if no children or child is an 'a' element
       if (!$(this).children().length || $(this).children('a').length) {
         // if filter matches text
-        if ($(this).text().toLowerCase().includes(e.target.value.toLowerCase())) {
+        if ($(this).text().toLowerCase().includes(sanitized)) {
+          // show 'tr'
           $(this).closest('tr').show();
+          // break from inner loop
           return false;
         } else {
+          // hide 'tr'
           $(this).closest('tr').hide();
         }
       }

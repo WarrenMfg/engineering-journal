@@ -71,4 +71,9 @@ const updateRow = (id, resource) => {
       tableData.firstElementChild.innerText = getHost(resource.link);
     }
   });
+
+  // if currently filtering, run filter
+  // query filter input
+  const filterInputValue = DOMPurify.sanitize($('#filter').val());
+  if (filterInputValue) filterTableRows({ target: { value: filterInputValue } });
 };

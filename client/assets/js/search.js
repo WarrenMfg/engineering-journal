@@ -5,6 +5,8 @@ const searchModal = () => {
   const search = $('#modal-search');
   // query site input
   const site = $('#modal-site');
+  // query radio inputs
+  const radioInputs = $('.form-check-input');
 
   // query search button
   const searchButton = $('#search');
@@ -17,6 +19,13 @@ const searchModal = () => {
 
     // show search modal
     modal.toggle().addClass('show');
+
+    // clear inputs
+    search.val('');
+    site.val('');
+    radioInputs.each((i, el) => {
+      el.checked = false;
+    });
 
     // focus on first input
     modal.find('.form-control').first().focus();
@@ -78,7 +87,6 @@ const searchModal = () => {
   });
 
   // add event listener to site input
-  const radioInputs = $('.form-check-input');
   site.on('keyup', e => {
     radioInputs.each((i, el) => {
       if (e.target.value === el.value) el.checked = true;
@@ -101,10 +109,6 @@ const searchModal = () => {
 
     // return if errors
     if (!validatedSearchInputs) return;
-
-    // clear inputs
-    search.val('');
-    site.val('');
 
     // hide search modal
     modal.toggle().removeClass('show');

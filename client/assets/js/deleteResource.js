@@ -8,7 +8,7 @@ const deleteResource = e => {
 
   // AJAX
   $.ajax({
-    url: `${API_URL}/api/resource/${collection}/${id}`,
+    url: `${API_URL}/api/resource/${localStorage.password}/${collection}/${id}`,
     type: 'DELETE',
     dataType: 'json',
     success: resource => {

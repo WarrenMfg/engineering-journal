@@ -8,7 +8,7 @@ $(function() {
 
   // make AJAX request
   $.ajax({
-    url: `${API_URL}/api/resources/${collection}`,
+    url: `${API_URL}/api/resources/${localStorage.password}/${collection}`,
     type: 'GET',
     dataType: 'json',
     success: resources => {
@@ -187,7 +187,7 @@ $(function() {
     // if tr has classname 'pin' then remove-pin
     if (tr.hasClass('pin')) {
       $.ajax({
-        url: `${API_URL}/api/resource/remove-pin/${collection}/${id}`,
+        url: `${API_URL}/api/resource/remove-pin/${localStorage.password}/${collection}/${id}`,
         type: 'PUT',
         dataType: 'json',
         success: resource => {
@@ -224,7 +224,7 @@ $(function() {
       // otherwise add-pin
     } else {
       $.ajax({
-        url: `${API_URL}/api/resource/add-pin/${collection}/${id}`,
+        url: `${API_URL}/api/resource/add-pin/${localStorage.password}/${collection}/${id}`,
         type: 'PUT',
         dataType: 'json',
         success: resource => {

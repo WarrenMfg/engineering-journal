@@ -28,7 +28,7 @@ const editResource = e => {
 
   // AJAX
   $.ajax({
-    url: `${API_URL}/api/resource/${collection}/${id}`,
+    url: `${API_URL}/api/resource/${localStorage.password}/${collection}/${id}`,
     type: 'PUT',
     contentType: 'application/json',
     data: JSON.stringify(validatedResourceInputs),

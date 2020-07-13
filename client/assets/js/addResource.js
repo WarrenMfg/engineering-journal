@@ -25,7 +25,7 @@ const addResource = e => {
 
   // AJAX
   $.ajax({
-    url: `${API_URL}/api/resource/${collection}`,
+    url: `${API_URL}/api/resource/${localStorage.password}/${collection}`,
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify(validatedResourceInputs),

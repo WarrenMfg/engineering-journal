@@ -106,7 +106,6 @@ const searchModal = () => {
 
     // get search and site inputs
     const validatedSearchInputs = validateSearchInputs(search.val().trim(), site.val().trim());
-
     // return if errors
     if (!validatedSearchInputs) return;
 

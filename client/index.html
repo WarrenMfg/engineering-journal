@@ -2,8 +2,18 @@
 <html>
 
 <head>
+  <script src="assets/js/purify.min.js"></script>
   <script>
-    if (!localStorage.password) localStorage.setItem('password', prompt('Enter password'));
+    DOMPurify.setConfig({ ALLOWED_TAGS: [] });
+
+    if (!localStorage.password) {
+      const password = DOMPurify.sanitize(prompt('Enter password'));
+      if (!password) {
+        window.location.replace('about:blank');
+      } else {
+        localStorage.setItem('password', password);
+      }
+    }
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -108,7 +118,6 @@
   </footer>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/purify.min.js"></script>
   <script src="assets/js/utils.js"></script>
   <script src="assets/js/updatePassword.js"></script>
   <script src="assets/js/search.js"></script>

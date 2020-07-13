@@ -61,14 +61,34 @@ const prependToTable = resource => {
   // query tbody
   const tbody = $('tbody');
 
-  tbody.prepend(
-    tableRow(
-      '',
-      resource.createdAt,
-      resource.description,
-      resource.keywords,
-      resource.link,
-      resource._id
-    )
-  );
+  const pins = tbody.find('.pin');
+
+  // if resources are pinned, add new resource after pins
+  if (pins.length) {
+    pins
+      .last()
+      .after(
+        tableRow(
+          '',
+          resource.createdAt,
+          resource.description,
+          resource.keywords,
+          resource.link,
+          resource._id
+        )
+      );
+
+    // else prepend to tbody
+  } else {
+    tbody.prepend(
+      tableRow(
+        '',
+        resource.createdAt,
+        resource.description,
+        resource.keywords,
+        resource.link,
+        resource._id
+      )
+    );
+  }
 };

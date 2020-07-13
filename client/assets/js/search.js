@@ -77,14 +77,26 @@ const searchModal = () => {
     unfreezeBody();
   });
 
+  // add event listener to site input
+  const radioInputs = $('.form-check-input');
+  site.on('keyup', e => {
+    radioInputs.each((i, el) => {
+      if (e.target.value === el.value) el.checked = true;
+      else el.checked = false;
+    });
+  });
+
+  // add event listeners to radio buttons
+  radioInputs.closest('.radios').on('click', 'input', e => {
+    site.val(e.target.value);
+  });
+
   // add event listener to submit
   modal.find('button[type=submit]').on('click', e => {
     // prevent default form behavior
     e.preventDefault();
 
     // get search and site inputs
-    const search = $('#modal-search');
-    const site = $('#modal-site');
     const validatedSearchInputs = validateSearchInputs(search.val().trim(), site.val().trim());
 
     // return if errors

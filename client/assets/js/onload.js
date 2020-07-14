@@ -198,6 +198,13 @@ $(function() {
 
           // query tr without pin class and
           const notPinned = tr.closest('tbody').children(':not(.pin)');
+
+          // if no pins then remove .pin from tr
+          if (!notPinned.length) {
+            tr.removeClass('pin');
+            return;
+          }
+
           // iterate to find placement of tr
           notPinned.each(function() {
             if (tr.data('createdat') > $(this).data('createdat')) {

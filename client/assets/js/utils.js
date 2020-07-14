@@ -59,7 +59,18 @@ const populateDropdownMenu = (namespaces, collection) => {
   dropdownMenu.children().first().nextAll().remove();
 
   // sort namespaces
-  namespaces.sort();
+  namespaces.sort((a, b) => {
+    const aLC = a.toLowerCase();
+    const bLC = b.toLowerCase();
+    if (aLC < bLC) {
+      return -1;
+    } else if (aLC > bLC) {
+      return 1;
+    } else {
+      // this should never happen
+      return 0;
+    }
+  });
 
   // default topics
   const defaults = [ 'CSS', 'Express', 'HTML', 'JavaScript', 'MongoDB', 'Node', 'React' ];

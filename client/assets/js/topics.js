@@ -92,7 +92,7 @@
 
     // AJAX
     $.ajax({
-      url: `${API_URL}/api/collection/${localStorage.password}/${collection}`,
+      url: `${API_URL}/api/collection/${localStorage.password}/${localStorage.topic}`,
       type: 'DELETE',
       dataType: 'json',
       success: data => {
@@ -143,7 +143,6 @@
       type: 'PUT',
       dataType: 'json',
       success: data => {
-        console.log('data', data);
         // handle error if no resource
         if (!data.namespaces.length || !data.updatedCollection) {
           return handleErrors('Sorry, an error has occurred.');

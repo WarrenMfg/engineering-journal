@@ -62,7 +62,7 @@ const populateDropdownMenu = (namespaces, collection) => {
   namespaces.sort();
 
   // default topics
-  const defaults = [ 'CSS', 'EXPRESS', 'HTML', 'JAVASCRIPT', 'MONGODB', 'NODE', 'REACT' ];
+  const defaults = [ 'CSS', 'Express', 'HTML', 'JavaScript', 'MongoDB', 'Node', 'React' ];
 
   // add to dropdown menu
   namespaces.forEach(ns => {

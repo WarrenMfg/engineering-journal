@@ -4,21 +4,25 @@
 
   // add event listern to topic.html links
   dropdownMenu.on('click', 'a[href="topic.html"]', e => {
+    // used to handoff collection name
+    // so that topic.js can use it to populate h1.page-title in topic.html
+    // then onload.js uses h1.page-title to fetch collection
     localStorage.setItem('topic', e.target.innerText);
   });
 
   // query add topic from dropdown menu
   const addTopic = dropdownMenu.children().first();
 
-  // query filter input
-  const filterInput = $('#filter');
+  // query filter or update-password input
+  const filter = $('#filter');
+  const filterOrUpdatePassword = $('#filter').length ? filter : $('#update-password');
 
   // query new topic name input field
   const newTopicName = $('#new-topic-name');
 
   // add on click event listener
   addTopic.on('click', () => {
-    filterInput.hide();
+    filterOrUpdatePassword.hide();
     newTopicName.val('');
     newTopicName.show().focus();
   });
@@ -26,7 +30,7 @@
   // add on blur event listener
   newTopicName.on('blur', function() {
     $(this).hide();
-    filterInput.show();
+    filterOrUpdatePassword.show();
   });
 
   // add Enter event listener

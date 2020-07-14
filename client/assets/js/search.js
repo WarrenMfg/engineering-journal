@@ -122,6 +122,3 @@ const searchModal = () => {
     );
   });
 };
-
-// add radio buttons for duckduckgo and google
-// add radio buttons for MDN, w3schools,

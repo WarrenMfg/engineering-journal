@@ -51,6 +51,35 @@ const handleErrors = feedback => {
   }
 };
 
+// add namespaces to dropdown menu
+const populateDropdownMenu = (namespaces, collection) => {
+  // populate dropdown menu for topics
+  const dropdownMenu = $('.dropdown-menu');
+  // empty dropdown menu
+  dropdownMenu.children().first().nextAll().remove();
+
+  // sort namespaces
+  namespaces.sort();
+
+  // default topics
+  const defaults = [ 'CSS', 'EXPRESS', 'HTML', 'JAVASCRIPT', 'MONGODB', 'NODE', 'REACT' ];
+
+  // add to dropdown menu
+  namespaces.forEach(ns => {
+    if (defaults.includes(ns)) {
+      dropdownMenu.append(
+        `<a class="dropdown-item ${ns === collection &&
+          'active white'}" role="presentation" href="${ns.toLowerCase()}.html">${ns}</a>`
+      );
+    } else {
+      dropdownMenu.append(
+        `<a class="dropdown-item ${ns === collection &&
+          'active white'}" role="presentation" href="topic.html">${ns}</a>`
+      );
+    }
+  });
+};
+
 // validate resource inputs
 const validateResourceInputs = (description, keywords, link) => {
   // validate description

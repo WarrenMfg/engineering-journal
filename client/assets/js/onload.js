@@ -4,15 +4,15 @@ $(function() {
 
   /* START FETCH DATA ON LOAD */
   // query heading
-  const collection = $('h1.page-title').html();
+  const collectionH1text = $('h1.page-title').html();
 
   // AJAX
   $.ajax({
-    url: `${API_URL}/api/resources/${localStorage.password}/${collection}`,
+    url: `${API_URL}/api/resources/${localStorage.password}/${collectionH1text}`,
     type: 'GET',
     dataType: 'json',
     success: data => {
-      populateDropdownMenu(data.namespaces, collection);
+      populateDropdownMenu(data.namespaces, collectionH1text);
 
       // if no results, handle errors / provide feedback
       if (!data.docs.length) return handleErrors('No resouces yet.');
@@ -177,8 +177,8 @@ $(function() {
     // return if clicked on thead
     if (target.closest('thead').length) return;
 
-    // query collection
-    const collection = $('h1.page-title').html();
+    // query collection again because user may have changed name w/o reload
+    const collectionH1text = $('h1.page-title').html();
     // query tr and resource button#id
     const tr = target.closest('tr');
     const id = tr.find('button').attr('id');
@@ -189,7 +189,7 @@ $(function() {
     // if tr has classname 'pin' then remove-pin
     if (tr.hasClass('pin')) {
       $.ajax({
-        url: `${API_URL}/api/resource/remove-pin/${localStorage.password}/${collection}/${id}`,
+        url: `${API_URL}/api/resource/remove-pin/${localStorage.password}/${collectionH1text}/${id}`,
         type: 'PUT',
         dataType: 'json',
         success: resource => {
@@ -233,7 +233,7 @@ $(function() {
       // otherwise add-pin
     } else {
       $.ajax({
-        url: `${API_URL}/api/resource/add-pin/${localStorage.password}/${collection}/${id}`,
+        url: `${API_URL}/api/resource/add-pin/${localStorage.password}/${collectionH1text}/${id}`,
         type: 'PUT',
         dataType: 'json',
         success: resource => {

@@ -6,8 +6,8 @@
 
   // add event listern to topic.html links
   dropdownMenu.on('click', 'a[href="topic.html"]', e => {
-    // used to handoff collection name
-    // so that topic.js can use it to populate h1.page-title in topic.html
+    // localStorage is used to handoff collection name
+    // so that topicCollection.js can use it to populate h1.page-title in topic.html
     // then onload.js uses h1.page-title to fetch collection
     localStorage.setItem('topic', e.target.innerText);
   });
@@ -24,7 +24,6 @@
 
   // query collection
   const collectionH1 = $('h1.page-title');
-  const collection = collectionH1.html();
 
   // add on click event listener
   addTopic.on('click', () => {
@@ -55,9 +54,12 @@
         dataType: 'json',
         success: data => {
           // handle error if no resource
-          if (!data.namespaces.length) return handleErrors('Sorry, an error has occurred.');
+          if (!data.namespaces.length || !data.newNamespace) {
+            return handleErrors('Sorry, an error has occurred.');
+          }
+
           // update dropdown menu with all collections
-          populateDropdownMenu(data.namespaces, collection);
+          populateDropdownMenu(data.namespaces, collectionH1.text());
         },
         error: (xhr, errorType, exception) => {
           // log error
@@ -98,15 +100,17 @@
       success: data => {
         // handle error if no resource
         if (!data.dropped) return handleErrors('Sorry, an error has occurred.');
-
-        // replace current page with index.html
-        window.location.replace(window.location.origin + '/index.html');
       },
       error: (xhr, errorType, exception) => {
         // log error
         console.log('addResource error:', xhr, errorType, exception);
         // handle error
         handleErrors('Sorry, an error has occurred.');
+      },
+      complete: () => {
+        localStorage.removeItem('topic');
+        // replace current page with index.html
+        window.location.replace(window.location.origin + '/index.html');
       }
     });
   });
@@ -133,6 +137,8 @@
       collectionH1.text(localStorage.topic);
       return handleErrors('Please enter a valid topic.');
     }
+    // if no change
+    if (sanitized === localStorage.topic) return;
 
     // toggle progress cursor and masking div on
     $('#mask').toggle();

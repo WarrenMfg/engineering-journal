@@ -22,6 +22,10 @@
   // query new topic name input field
   const newTopicName = $('#new-topic-name');
 
+  // query collection
+  const collectionH1 = $('h1.page-title');
+  const collection = collectionH1.html();
+
   // add on click event listener
   addTopic.on('click', () => {
     filterOrUpdatePassword.hide();
@@ -53,7 +57,7 @@
           // handle error if no resource
           if (!data.namespaces.length) return handleErrors('Sorry, an error has occurred.');
           // update dropdown menu with all collections
-          populateDropdownMenu(data.namespaces, $('h1.page-title').html());
+          populateDropdownMenu(data.namespaces, collection);
         },
         error: (xhr, errorType, exception) => {
           // log error
@@ -86,8 +90,6 @@
     // toggle progress cursor and masking div on
     $('#mask').toggle();
 
-    const collection = $('h1.page-title').html();
-
     // AJAX
     $.ajax({
       url: `${API_URL}/api/collection/${localStorage.password}/${collection}`,
@@ -95,7 +97,7 @@
       dataType: 'json',
       success: data => {
         // handle error if no resource
-        if (!data.droppedCollection) return handleErrors('Sorry, an error has occurred.');
+        if (!data.dropped) return handleErrors('Sorry, an error has occurred.');
 
         // replace current page with index.html
         window.location.replace(window.location.origin + '/index.html');
@@ -110,4 +112,61 @@
   });
 
   /* END DELETE COLLECTION */
+  /* START UPDATE COLLECTION NAME EVENT LISTENERS */
+
+  // add keydown event listener to collectionH1
+  collectionH1.on('keydown', e => {
+    if (e.key === 'Enter') {
+      // make content editable again
+      e.target.contentEditable = false;
+    }
+  });
+
+  // blur will run both on blur and on Enter because Enter blurs target
+  collectionH1.on('blur', e => {
+    // make target editable again
+    e.target.contentEditable = true;
+
+    // sanitize input
+    const sanitized = DOMPurify.sanitize(e.target.innerText);
+    if (!sanitized) {
+      collectionH1.text(localStorage.topic);
+      return handleErrors('Please enter a valid topic.');
+    }
+
+    // toggle progress cursor and masking div on
+    $('#mask').toggle();
+
+    // AJAX
+    $.ajax({
+      url: `${API_URL}/api/collection/${localStorage.password}/${localStorage.topic}/${sanitized}`,
+      type: 'PUT',
+      dataType: 'json',
+      success: data => {
+        console.log('data', data);
+        // handle error if no resource
+        if (!data.namespaces.length || !data.updatedCollection) {
+          return handleErrors('Sorry, an error has occurred.');
+        }
+
+        // update localStorage
+        localStorage.setItem('topic', data.updatedCollection);
+
+        // update dropdown menu with all collections
+        populateDropdownMenu(data.namespaces, data.updatedCollection);
+      },
+      error: (xhr, errorType, exception) => {
+        // log error
+        console.log('addResource error:', xhr, errorType, exception);
+        // handle error
+        handleErrors('Sorry, an error has occurred.');
+      },
+      complete: () => {
+        // toggle progress cursor and masking div off
+        $('#mask').toggle();
+      }
+    });
+  });
+
+  /* END UPDATE COLLECTION NAME EVENT LISTENERS */
 })();

@@ -7,7 +7,7 @@
     DOMPurify.setConfig({ ALLOWED_TAGS: [] });
 
     if (!localStorage.password) {
-      const password = DOMPurify.sanitize(prompt('Enter password'));
+      const password = DOMPurify.sanitize(prompt('Enter password').trim());
       if (!password) {
         window.location.replace('about:blank');
       } else {

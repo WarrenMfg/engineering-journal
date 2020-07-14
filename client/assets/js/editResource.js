@@ -21,14 +21,16 @@ const editResource = e => {
   if (!validatedResourceInputs) return $('#mask').toggle();
 
   // query collection
-  const collection = $('h1.page-title').html();
+  const collection = $('h1.page-title').text();
 
   // query resource _id (added from onload.js table click delegation)
   const id = $('.modal.edit button[type=submit]').attr('data-id');
 
   // AJAX
   $.ajax({
-    url: `${API_URL}/api/resource/${localStorage.password}/${collection}/${id}`,
+    url: `${API_URL}/api/resource/${DOMPurify.sanitize(
+      localStorage.password.trim()
+    )}/${collection}/${id}`,
     type: 'PUT',
     contentType: 'application/json',
     data: JSON.stringify(validatedResourceInputs),

@@ -131,7 +131,7 @@
     // get collections for dropdown menu
     // AJAX
     $.ajax({
-      url: `${API_URL}/api/collections/${localStorage.password}`,
+      url: `${API_URL}/api/collections/${DOMPurify.sanitize(localStorage.password.trim())}`,
       type: 'GET',
       dataType: 'json',
       success: data => {
@@ -142,7 +142,7 @@
         $('#mask').attr('style', null);
 
         // update dropdown menu with all collections
-        populateDropdownMenu(data.namespaces, $('h1.page-title').html());
+        populateDropdownMenu(data.namespaces, $('h1.page-title').text());
       },
       error: (xhr, errorType, exception) => {
         // log error

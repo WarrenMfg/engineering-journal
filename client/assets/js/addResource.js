@@ -21,11 +21,13 @@ const addResource = e => {
   if (!validatedResourceInputs) return $('#mask').toggle();
 
   // query collection
-  const collection = $('h1.page-title').html();
+  const collection = $('h1.page-title').text();
 
   // AJAX
   $.ajax({
-    url: `${API_URL}/api/resource/${localStorage.password}/${collection}`,
+    url: `${API_URL}/api/resource/${DOMPurify.sanitize(
+      localStorage.password.trim()
+    )}/${collection}`,
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify(validatedResourceInputs),

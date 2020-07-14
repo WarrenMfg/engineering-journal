@@ -3,12 +3,14 @@ const deleteResource = e => {
   $('#mask').toggle();
 
   // query collection
-  const collection = $('h1.page-title').html();
+  const collection = $('h1.page-title').text();
   const id = e.target.dataset.id;
 
   // AJAX
   $.ajax({
-    url: `${API_URL}/api/resource/${localStorage.password}/${collection}/${id}`,
+    url: `${API_URL}/api/resource/${DOMPurify.sanitize(
+      localStorage.password.trim()
+    )}/${collection}/${id}`,
     type: 'DELETE',
     dataType: 'json',
     success: resource => {

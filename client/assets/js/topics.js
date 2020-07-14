@@ -47,7 +47,7 @@
 
       // AJAX
       $.ajax({
-        url: `${API_URL}/api/collection/${localStorage.password}`,
+        url: `${API_URL}/api/collection/${DOMPurify.sanitize(localStorage.password.trim())}`,
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({ collection: sanitized }),
@@ -94,7 +94,9 @@
 
     // AJAX
     $.ajax({
-      url: `${API_URL}/api/collection/${localStorage.password}/${localStorage.topic}`,
+      url: `${API_URL}/api/collection/${DOMPurify.sanitize(
+        localStorage.password.trim()
+      )}/${DOMPurify.sanitize(localStorage.topic.trim())}`,
       type: 'DELETE',
       dataType: 'json',
       success: data => {
@@ -134,18 +136,20 @@
     // sanitize input
     const sanitized = DOMPurify.sanitize(e.target.innerText);
     if (!sanitized) {
-      collectionH1.text(localStorage.topic);
+      collectionH1.text(DOMPurify.sanitize(localStorage.topic.trim()));
       return handleErrors('Please enter a valid topic.');
     }
     // if no change
-    if (sanitized === localStorage.topic) return;
+    if (sanitized === DOMPurify.sanitize(localStorage.topic.trim())) return;
 
     // toggle progress cursor and masking div on
     $('#mask').toggle();
 
     // AJAX
     $.ajax({
-      url: `${API_URL}/api/collection/${localStorage.password}/${localStorage.topic}/${sanitized}`,
+      url: `${API_URL}/api/collection/${DOMPurify.sanitize(
+        localStorage.password.trim()
+      )}/${DOMPurify.sanitize(localStorage.topic.trim())}/${sanitized}`,
       type: 'PUT',
       dataType: 'json',
       success: data => {

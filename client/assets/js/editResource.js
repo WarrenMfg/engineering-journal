@@ -29,7 +29,7 @@ const editResource = e => {
   // AJAX
   $.ajax({
     url: `${API_URL}/api/resource/${DOMPurify.sanitize(
-      localStorage.password.trim()
+      localStorage.getItem('password').trim()
     )}/${collection}/${id}`,
     type: 'PUT',
     contentType: 'application/json',

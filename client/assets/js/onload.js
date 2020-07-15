@@ -9,7 +9,7 @@ $(function() {
   // AJAX
   $.ajax({
     url: `${API_URL}/api/resources/${DOMPurify.sanitize(
-      localStorage.password.trim()
+      localStorage.getItem('password').trim()
     )}/${collectionH1text}`,
     type: 'GET',
     dataType: 'json',
@@ -17,7 +17,7 @@ $(function() {
       populateDropdownMenu(data.namespaces, collectionH1text);
 
       // if no results, handle errors / provide feedback
-      if (!data.docs.length) return handleErrors('No resouces yet.');
+      if (!data.docs.length) return handleErrors('No resources yet.');
 
       // add resources to DOM
       appendToTable(data.docs);
@@ -38,14 +38,14 @@ $(function() {
   const appendToTable = resources => {
     // query tbody
     const tbody = $('tbody');
-    let order;
+    let pinOrder;
     let pins = [];
 
     // make table rows and pins
     resources.forEach(resource => {
-      // if meta, keep pins as order
+      // if meta, keep pins as pinOrder
       if (resource.meta) {
-        order = resource.pins;
+        pinOrder = resource.pins;
 
         // if pinned table row, push to pins array
       } else if (resource.isPinned) {
@@ -66,14 +66,14 @@ $(function() {
       }
     });
 
-    if (order) prependToTable(tbody, order, pins);
+    if (pinOrder) prependToTable(tbody, pinOrder, pins);
   };
 
-  const prependToTable = (tbody, order, pins) => {
+  const prependToTable = (tbody, pinOrder, pins) => {
     tbody.prepend(() => {
       let html;
-      // iterate through order array to find in pins array
-      order.forEach(id => {
+      // iterate through pinOrder array to find in pins array
+      pinOrder.forEach(id => {
         const pin = pins.find(obj => obj._id === id);
         html += tableRow('pin', pin.createdAt, pin.description, pin.keywords, pin.link, pin._id);
       });
@@ -192,7 +192,7 @@ $(function() {
     if (tr.hasClass('pin')) {
       $.ajax({
         url: `${API_URL}/api/resource/remove-pin/${DOMPurify.sanitize(
-          localStorage.password.trim()
+          localStorage.getItem('password').trim()
         )}/${collectionH1text}/${id}`,
         type: 'PUT',
         dataType: 'json',
@@ -238,7 +238,7 @@ $(function() {
     } else {
       $.ajax({
         url: `${API_URL}/api/resource/add-pin/${DOMPurify.sanitize(
-          localStorage.password.trim()
+          localStorage.getItem('password').trim()
         )}/${collectionH1text}/${id}`,
         type: 'PUT',
         dataType: 'json',

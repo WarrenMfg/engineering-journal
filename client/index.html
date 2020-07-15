@@ -6,8 +6,8 @@
   <script>
     DOMPurify.setConfig({ ALLOWED_TAGS: [] });
 
-    if (!localStorage.password) {
-      const password = DOMPurify.sanitize(prompt('Enter password').trim());
+    if (!localStorage.getItem('password')) {
+      const password = DOMPurify.sanitize((prompt('Enter password') || '').trim());
       if (!password) {
         window.location.replace('about:blank');
       } else {
@@ -135,7 +135,7 @@
     // get collections for dropdown menu
     // AJAX
     $.ajax({
-      url: `${API_URL}/api/collections/${DOMPurify.sanitize(localStorage.password.trim())}`,
+      url: `${API_URL}/api/collections/${DOMPurify.sanitize(localStorage.getItem('password').trim())}`,
       type: 'GET',
       dataType: 'json',
       success: data => {

@@ -31,60 +31,37 @@ const searchModal = () => {
     modal.find('.form-control').first().focus();
   });
 
+  // callback to close modal; used below
+  const closeModal = () => {
+    // clear inputs
+    search.val('');
+    site.val('');
+    // hide search modal
+    modal.toggle().removeClass('show');
+
+    // unfreeze body
+    unfreezeBody();
+  };
+
   // toggle search modal on escape
   modal.on('keydown', e => {
     if (e.key === 'Escape') {
-      // clear inputs
-      search.val('');
-      site.val('');
-      // hide search modal
-      modal.toggle().removeClass('show');
-
-      // unfreeze body
-      unfreezeBody();
+      closeModal();
     }
   });
 
   // toggle search modal when click outside of search modal
   modal.on('mousedown', e => {
     if (e.target.classList.contains('modal')) {
-      // clear inputs
-      search.val('');
-      site.val('');
-
-      // hide search modal
-      modal.toggle().removeClass('show');
-
-      // unfreeze body
-      unfreezeBody();
+      closeModal();
     }
   });
 
   // add event listener to search modal close button
-  modal.find('button.close').on('click', () => {
-    // clear inputs
-    search.val('');
-    site.val('');
-
-    // hide search modal
-    modal.toggle().removeClass('show');
-
-    // unfreeze body
-    unfreezeBody();
-  });
+  modal.find('button.close').on('click', closeModal);
 
   // add event listener to search modal cancel button
-  modal.find('.modal-footer button').on('click', () => {
-    // clear inputs
-    search.val('');
-    site.val('');
-
-    // hide search modal
-    modal.toggle().removeClass('show');
-
-    // unfreeze body
-    unfreezeBody();
-  });
+  modal.find('.modal-footer button').on('click', closeModal);
 
   // add event listener to site input
   site.on('keyup', e => {

@@ -9,7 +9,7 @@
     // localStorage is used to handoff collection name
     // so that topicCollection.js can use it to populate h1.page-title in topic.html
     // then onload.js uses h1.page-title to fetch collection
-    localStorage.setItem('topic', e.target.innerText);
+    localStorage.setItem('topic', e.target.innerText.trim());
   });
 
   // query add topic from dropdown menu
@@ -40,14 +40,20 @@
 
   // add Enter event listener
   newTopicName.on('keydown', e => {
-    const sanitized = DOMPurify.sanitize(e.target.value.trim());
-    if (e.key === 'Enter' && sanitized) {
+    if (e.key === 'Enter') {
+      // sanitize
+      const sanitized = DOMPurify.sanitize(e.target.value.trim());
+      // if no sanitized input, return
+      if (!sanitized) return newTopicName.blur();
+
       // toggle progress cursor and masking div on
       $('#mask').toggle();
 
       // AJAX
       $.ajax({
-        url: `${API_URL}/api/collection/${DOMPurify.sanitize(localStorage.password.trim())}`,
+        url: `${API_URL}/api/collection/${DOMPurify.sanitize(
+          localStorage.getItem('password').trim()
+        )}`,
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({ collection: sanitized }),
@@ -95,8 +101,8 @@
     // AJAX
     $.ajax({
       url: `${API_URL}/api/collection/${DOMPurify.sanitize(
-        localStorage.password.trim()
-      )}/${DOMPurify.sanitize(localStorage.topic.trim())}`,
+        localStorage.getItem('password').trim()
+      )}/${DOMPurify.sanitize(localStorage.getItem('topic').trim())}`,
       type: 'DELETE',
       dataType: 'json',
       success: data => {
@@ -134,13 +140,13 @@
     e.target.contentEditable = true;
 
     // sanitize input
-    const sanitized = DOMPurify.sanitize(e.target.innerText);
+    const sanitized = DOMPurify.sanitize(e.target.innerText.trim());
     if (!sanitized) {
-      collectionH1.text(DOMPurify.sanitize(localStorage.topic.trim()));
+      collectionH1.text(DOMPurify.sanitize(localStorage.getItem('topic').trim()));
       return handleErrors('Please enter a valid topic.');
     }
     // if no change
-    if (sanitized === DOMPurify.sanitize(localStorage.topic.trim())) return;
+    if (sanitized === DOMPurify.sanitize(localStorage.getItem('topic').trim())) return;
 
     // toggle progress cursor and masking div on
     $('#mask').toggle();
@@ -148,8 +154,8 @@
     // AJAX
     $.ajax({
       url: `${API_URL}/api/collection/${DOMPurify.sanitize(
-        localStorage.password.trim()
-      )}/${DOMPurify.sanitize(localStorage.topic.trim())}/${sanitized}`,
+        localStorage.getItem('password').trim()
+      )}/${DOMPurify.sanitize(localStorage.getItem('topic').trim())}/${sanitized}`,
       type: 'PUT',
       dataType: 'json',
       success: data => {

@@ -66,7 +66,11 @@
 
           // update dropdown menu and edit modal select element with all collections
           const sortedNamespaces = populateDropdownMenu(data.namespaces, collectionH1.text());
-          populateEditTopic(sortedNamespaces, collectionH1text);
+
+          // if not adding new topic from index.html, then update edit modal select element
+          if (window.location.pathname !== '/index.html') {
+            populateEditTopic(sortedNamespaces, collectionH1text);
+          }
         },
         error: (xhr, errorType, exception) => {
           // log error

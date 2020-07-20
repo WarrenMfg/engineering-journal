@@ -14,7 +14,8 @@ $(function() {
     type: 'GET',
     dataType: 'json',
     success: data => {
-      populateDropdownMenu(data.namespaces, collectionH1text);
+      const sortedNamespaces = populateDropdownMenu(data.namespaces, collectionH1text);
+      populateEditTopic(sortedNamespaces, collectionH1text);
 
       // if no results, handle errors / provide feedback
       if (!data.docs.length) return handleErrors('No resources yet.');
@@ -155,7 +156,7 @@ $(function() {
     // get resource row
     const tableRow = $(e.target).closest('tr');
     // get edit modal form inputs
-    const inputs = $('.modal.edit .form-control');
+    const inputs = $('.modal.edit .form-control').not('#topic-select');
     // populate inputs with resource to be edited
     tableRow.children().each((i, tableData) => {
       if (i <= 1) {

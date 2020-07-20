@@ -89,6 +89,25 @@ const populateDropdownMenu = (namespaces, collection) => {
       );
     }
   });
+
+  return namespaces;
+};
+
+// add namespaces to select element
+const populateEditTopic = (sortedNamespaces, collection) => {
+  // query select element
+  const topicSelect = $('#topic-select');
+  // empty select element
+  topicSelect.children().remove();
+
+  // add to select element
+  sortedNamespaces.forEach(ns => {
+    if (ns === collection) {
+      topicSelect.append(`<option value=${ns} selected>${ns}</option>`);
+    } else {
+      topicSelect.append(`<option value=${ns}>${ns}</option>`);
+    }
+  });
 };
 
 // validate resource inputs

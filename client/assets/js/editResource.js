@@ -20,8 +20,9 @@ const editResource = e => {
   // toggle progress cursor and masking div off
   if (!validatedResourceInputs) return $('#mask').toggle();
 
-  // query collection
-  const collection = $('h1.page-title').text();
+  // query collections
+  const fromCollection = $('h1.page-title').text();
+  const toCollection = $('#topic-select').val();
 
   // query resource _id (added from onload.js table click delegation)
   const id = $('.modal.edit button[type=submit]').attr('data-id');
@@ -30,7 +31,7 @@ const editResource = e => {
   $.ajax({
     url: `${API_URL}/api/resource/${DOMPurify.sanitize(
       localStorage.getItem('password').trim()
-    )}/${collection}/${id}`,
+    )}/${fromCollection}/${toCollection}/${id}`,
     type: 'PUT',
     contentType: 'application/json',
     data: JSON.stringify(validatedResourceInputs),
@@ -38,8 +39,13 @@ const editResource = e => {
     success: resource => {
       // handle error if no resource
       if (!resource) return handleErrors('Sorry, an error has occurred.');
-      // update row with edited resource
-      updateRow(id, resource);
+
+      if (fromCollection === toCollection) {
+        // update row with edited resource
+        updateRow(id, resource);
+      } else {
+        $(`#${id}`).closest('tr').remove();
+      }
     },
     error: (xhr, errorType, exception) => {
       // log error

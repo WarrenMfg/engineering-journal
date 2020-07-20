@@ -64,8 +64,9 @@
             return handleErrors('Sorry, an error has occurred.');
           }
 
-          // update dropdown menu with all collections
-          populateDropdownMenu(data.namespaces, collectionH1.text());
+          // update dropdown menu and edit modal select element with all collections
+          const sortedNamespaces = populateDropdownMenu(data.namespaces, collectionH1.text());
+          populateEditTopic(sortedNamespaces, collectionH1text);
         },
         error: (xhr, errorType, exception) => {
           // log error

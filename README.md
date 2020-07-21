@@ -6,7 +6,7 @@
 
 # utils.js
 
-`DOMPurify` [:link:](https://github.com/WarrenMfg/engineering-journal/blob/a6d587f4eaff72db42b29c0c772600d13e37f6ce/client/assets/js/utils.js#L2)
+`DOMPurify` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/a6d587f4eaff72db42b29c0c772600d13e37f6ce/client/assets/js/utils.js#L2)
 - Configures allowed tags from user input
 
 ***

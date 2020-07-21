@@ -69,7 +69,7 @@
 
           // if not adding new topic from index.html, then update edit modal select element
           if (window.location.pathname !== '/index.html') {
-            populateEditTopic(sortedNamespaces, collectionH1text);
+            populateEditTopic(sortedNamespaces, collectionH1.text());
           }
         },
         error: (xhr, errorType, exception) => {
@@ -123,7 +123,9 @@
       complete: () => {
         localStorage.removeItem('topic');
         // replace current page with index.html
-        window.location.replace(window.location.origin + '/index.html');
+        const href = window.location.href.split('/');
+        href.splice(-1, 1, 'index.html');
+        window.location.replace(href.join('/'));
       }
     });
   });

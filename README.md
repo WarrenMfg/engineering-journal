@@ -81,6 +81,46 @@
 - Decorates [search modal](https://github.com/WarrenMfg/engineering-journal/blob/784a7214d5eac5e528dc1bc18c8ab4de703e9613/client/topic.html#L142) with event listeners
 - Invoked in: [onload.js IIFE](https://github.com/WarrenMfg/engineering-journal/blob/784a7214d5eac5e528dc1bc18c8ab4de703e9613/client/assets/js/onload.js#L90)
 
+# onload.js
+
+`$.ajax` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/9765c3f4bb2fb11af5fe907bfef647d11d31e341/client/assets/js/onload.js#L10)
+- GET request invoked when loading a topic page
+- Populates table with the topic's corresonding resources (see below)
+
+`appendToTable` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/9765c3f4bb2fb11af5fe907bfef647d11d31e341/client/assets/js/onload.js#L39)
+- Function
+- Appends resources to table body
+- Params: resources: array of objects
+- Returns: undefined (side effects only)
+
+`prependToTable` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/9765c3f4bb2fb11af5fe907bfef647d11d31e341/client/assets/js/onload.js#L73)
+- Function
+- Prepends pinned resources to table body
+- Params: tbody: HTML element, pinOrder: array of pins, pins: array of objects (pinned resources)
+- Returns: undefined (side effects only)
+
+`editModal` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/9765c3f4bb2fb11af5fe907bfef647d11d31e341/client/assets/js/onload.js#L96)
+- Event listeners
+- Close modal event listeners: keydown, mousedown, click
+- Delete resource event listener: click
+
+`table` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/9765c3f4bb2fb11af5fe907bfef647d11d31e341/client/assets/js/onload.js#L138)
+- Event listeners
+- Show edit modal delegated event listener: click
+- Pin and unpin resources event listener: click
+  - PUT request to pin
+  - PUT request to unpin
+
+`#error-feedback` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/9765c3f4bb2fb11af5fe907bfef647d11d31e341/client/assets/js/onload.js#L274)
+- Event listener
+- Toggles [error feedback](https://github.com/WarrenMfg/engineering-journal/blob/9765c3f4bb2fb11af5fe907bfef647d11d31e341/client/topic.html#L57) display to none
+
+`debounce` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/9765c3f4bb2fb11af5fe907bfef647d11d31e341/client/assets/js/onload.js#L285)
+- Function
+- To delay filter [filterTableRows](https://github.com/WarrenMfg/engineering-journal/blob/9765c3f4bb2fb11af5fe907bfef647d11d31e341/client/assets/js/utils.js#L214) until typing stops
+- Params: func: filterTableRows function, delay: integer in milliseconds
+- Returns: anonymous function to be invoked by input event when filtering
+
 ***
 
 **Note**: See the [Engineering Journal API](https://github.com/WarrenMfg/engineering-journal-api) repo to integrate.

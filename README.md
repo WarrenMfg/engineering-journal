@@ -177,6 +177,18 @@
 - Params: id: string
 - Returns: undefined (side effects only)
 
+# search.js
+
+`searchModal` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/c6c5e54a5f9c896e716e7bf2a94e9f227cb9599c/client/assets/js/search.js#L1)
+- Function
+- Decorates [search modal](https://github.com/WarrenMfg/engineering-journal/blob/784a7214d5eac5e528dc1bc18c8ab4de703e9613/client/topic.html#L142) with event listeners
+  - Open search modal: click
+  - Close search modal: keydown, mousedown, click
+  - Cancel search modal: click
+  - Search user input: click (opens search result in new tab)
+- Params: none
+- Returns: undefined (side effects only)
+
 ***
 
 **Note**: See the [Engineering Journal API](https://github.com/WarrenMfg/engineering-journal-api) repo to integrate.

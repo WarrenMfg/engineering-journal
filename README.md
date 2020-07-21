@@ -12,7 +12,7 @@
 
 `API_URL` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/18aac9fbbeb39851adb7de0f7244c6143f07d48f/client/assets/js/utils.js#L5)
 - String
-- Sets the origin for the API
+- Sets the origin for the [API](https://github.com/WarrenMfg/engineering-journal-api)
 
 `timeoutID` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/18aac9fbbeb39851adb7de0f7244c6143f07d48f/client/assets/js/utils.js#L8)
 - Integer
@@ -120,6 +120,28 @@
 - To delay filter [filterTableRows](https://github.com/WarrenMfg/engineering-journal/blob/9765c3f4bb2fb11af5fe907bfef647d11d31e341/client/assets/js/utils.js#L214) until typing stops
 - Params: func: filterTableRows function, delay: integer in milliseconds
 - Returns: anonymous function to be invoked by input event when filtering
+
+# addResource.js
+
+`addResource` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/addResource.js#L1)
+- Function
+- Adds a new resource to the current topic
+- Params: click event
+- Returns: undefined (side effects only)
+- POST request to add new resource
+  - Invokes: [handleErrors](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L10) if errors, otherwise [prependToTable](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/addResource.js#L62) (see below)
+
+`prependToTable` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/addResource.js#L62)
+- Function
+- Prepends new resource to table body but after pinned items, if any
+- Invoked by: POST request from [addResource](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/addResource.js#L35)
+- Params: resource object
+- Returns: undefined (side effects only)
+
+`filterInputValue` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/addResource.js#L99)
+- String
+- User input from filter input element
+- If a user input exists while adding a new resource, [filterTableRows](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L214) is invoked
 
 ***
 

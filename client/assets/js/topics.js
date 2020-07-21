@@ -178,7 +178,8 @@
         localStorage.setItem('topic', data.updatedCollection);
 
         // update dropdown menu with all collections
-        populateDropdownMenu(data.namespaces, data.updatedCollection);
+        const sortedNamespaces = populateDropdownMenu(data.namespaces, data.updatedCollection);
+        populateEditTopic(sortedNamespaces, data.updatedCollection);
       },
       error: (xhr, errorType, exception) => {
         // log error

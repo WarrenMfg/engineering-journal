@@ -189,6 +189,37 @@
 - Params: none
 - Returns: undefined (side effects only)
 
+# topics.js
+
+`IIFE` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/65bd397577919044e0cf8adb0130a37f2337c96b/client/assets/js/topics.js#L1)
+- Immediately Invoked Function Expression
+- Decorates mulitple DOM elements with event listeners
+
+## Add a Topic
+
+- Dropdown menu: click to set topic name in localStorage, if click on custom topic link
+- Display input to add topic: click
+- Topic input: blur and keydown (to submit new topic name)
+  - POST request to add new topic
+  - Invokes: [handleErrors](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L10) if errors, otherwise [populateDropdownMenu](https://github.com/WarrenMfg/engineering-journal/blob/65bd397577919044e0cf8adb0130a37f2337c96b/client/assets/js/utils.js#L55), and/or [populateEditTopic](https://github.com/WarrenMfg/engineering-journal/blob/65bd397577919044e0cf8adb0130a37f2337c96b/client/assets/js/utils.js#L97) depending if viewing `index.html`
+
+## Delete a Topic
+
+- Click on delete button at bottom of page (of a custom page)
+- DELETE request to delete custom topic
+- Invokes: [handleErrors](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L10) if errors
+- Redirects to `index.html`
+
+## Update Topic Name
+
+- H1 is editable with `contenteditable` attribute
+- Keydown event listener for Enter key, blurs the element
+- On blur event listener
+  - PUT request to update topic name
+  - Invokes: [handleErrors](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L10) if errors, otherwise updates localStorage topic name and invokes [populateDropdownMenu](https://github.com/WarrenMfg/engineering-journal/blob/65bd397577919044e0cf8adb0130a37f2337c96b/client/assets/js/utils.js#L55) and [populateEditTopic](https://github.com/WarrenMfg/engineering-journal/blob/65bd397577919044e0cf8adb0130a37f2337c96b/client/assets/js/utils.js#L97)
+
+
+
 ***
 
 **Note**: See the [Engineering Journal API](https://github.com/WarrenMfg/engineering-journal-api) repo to integrate.

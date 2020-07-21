@@ -188,7 +188,7 @@
 - Immediately Invoked Function Expression
 - Decorates mulitple DOM elements with event listeners
 
-## Add a Topic
+`Add a Topic` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/5125b9d1aa18ffc52ac80c5ef31dcb82672c755e/client/assets/js/topics.js#L2)
 
 - Dropdown menu: click to set topic name in localStorage, if click on custom topic link
 - Display input to add topic: click
@@ -196,14 +196,14 @@
   - POST request to add new topic
   - Invokes: [handleErrors](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L10) if errors, otherwise [populateDropdownMenu](https://github.com/WarrenMfg/engineering-journal/blob/65bd397577919044e0cf8adb0130a37f2337c96b/client/assets/js/utils.js#L55), and/or [populateEditTopic](https://github.com/WarrenMfg/engineering-journal/blob/65bd397577919044e0cf8adb0130a37f2337c96b/client/assets/js/utils.js#L97) depending if viewing `index.html`
 
-## Delete a Topic
+`Delete a Topic` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/5125b9d1aa18ffc52ac80c5ef31dcb82672c755e/client/assets/js/topics.js#L93)
 
 - Click on delete button at bottom of page (of a custom page)
 - DELETE request to delete custom topic
 - Invokes: [handleErrors](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L10) if errors
 - Redirects to `index.html`
 
-## Update Topic Name
+`Update Topic Name` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/5125b9d1aa18ffc52ac80c5ef31dcb82672c755e/client/assets/js/topics.js#L134)
 
 - H1 is editable with `contenteditable` attribute
 - Keydown event listener for Enter key, blurs the element

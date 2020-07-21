@@ -68,7 +68,7 @@
           const sortedNamespaces = populateDropdownMenu(data.namespaces, collectionH1.text());
 
           // if not adding new topic from index.html, then update edit modal select element
-          if (window.location.pathname !== '/index.html') {
+          if (!window.location.pathname.includes('/index.html')) {
             populateEditTopic(sortedNamespaces, collectionH1.text());
           }
         },

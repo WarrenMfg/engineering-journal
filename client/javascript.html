@@ -3,7 +3,11 @@
 
 <head>
   <script>
-    if (!localStorage.getItem('password')) window.location.replace(window.location.origin + '/index.html');
+    if (!localStorage.getItem('password')) {
+      const href = window.location.href.split('/');
+      href.splice(-1, 1, 'index.html');
+      window.location.replace(href.join('/'));
+    }
     localStorage.removeItem('topic');
   </script>
   <meta charset="utf-8">

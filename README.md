@@ -2,22 +2,12 @@
 
 **Consolidate and organize bookmarks from browsers and scattered links collected in reading lists, note apps, docs, and spreadsheets.**
 
-![index.html](gifs/index.png)
+***
 
-## How to Use
+# utils.js
 
-Static `.html` files exist for HTML, CSS, JavaScript, and the MERN stack: MongoDB, Express, React, and Node. Customize as you see fit.
-
-![CSS](gifs/css.gif)
-
-But a generic `topic.html` file exists as a template for custom topics, with full CRUD capabilities:
-
-![Add topic](gifs/add-topic.gif)
-![Edit topic name](gifs/edit-topic-name.gif)
-
-As well as full CRUD capabilities on each resource on all topics:
-
-![Edit resource](gifs/edit-resource.gif)
+## `DOMPurify` [:link:](https://github.com/WarrenMfg/engineering-journal/blob/a6d587f4eaff72db42b29c0c772600d13e37f6ce/client/assets/js/utils.js#L2)
+- Configures allowed tags from user input
 
 ***
 

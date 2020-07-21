@@ -218,6 +218,13 @@
   - PUT request to update topic name
   - Invokes: [handleErrors](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L10) if errors, otherwise updates localStorage topic name and invokes [populateDropdownMenu](https://github.com/WarrenMfg/engineering-journal/blob/65bd397577919044e0cf8adb0130a37f2337c96b/client/assets/js/utils.js#L55) and [populateEditTopic](https://github.com/WarrenMfg/engineering-journal/blob/65bd397577919044e0cf8adb0130a37f2337c96b/client/assets/js/utils.js#L97)
 
+# topicCollection.js
+
+`IFFE` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/dd5940a049524fec7b474a84581ae355a5c8c5a1/client/assets/js/topicCollection.js#L1)
+- Immediately Invoked Function Expression
+- Queries localStorage for topic name and updates `title`, `meta`, and `h1` elements
+
+
 
 
 ***

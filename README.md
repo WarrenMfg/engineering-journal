@@ -143,6 +143,24 @@
 - User input from filter input element
 - If a user input exists while adding a new resource, [filterTableRows](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L214) is invoked
 
+# editResource.js
+
+`editResource` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/7ff1684fe3e383bd15c731fad80a7b3fcdb24266/client/assets/js/editResource.js#L1)
+- Function
+- Edits a resource
+- Invoked by: [form submission](https://github.com/WarrenMfg/engineering-journal/blob/7ff1684fe3e383bd15c731fad80a7b3fcdb24266/client/topic.html#L123)
+- Params: submit event
+- Returns: undefined (side effects only)
+- PUT request to edit resource
+  - Invokes: [handleErrors](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L10) if errors, otherwise [updateRow](https://github.com/WarrenMfg/engineering-journal/blob/7ff1684fe3e383bd15c731fad80a7b3fcdb24266/client/assets/js/editResource.js#L69) (see below)
+
+`updateRow` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/7ff1684fe3e383bd15c731fad80a7b3fcdb24266/client/assets/js/editResource.js#L69)
+- Function
+- Updates a table row after editing a resource
+- Params: id: string, resource: object
+- If a user input exists while adding a new resource, [filterTableRows](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L214) is invoked
+- Returns: undefined (side effects only)
+
 ***
 
 **Note**: See the [Engineering Journal API](https://github.com/WarrenMfg/engineering-journal-api) repo to integrate.

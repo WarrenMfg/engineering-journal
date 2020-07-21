@@ -161,6 +161,22 @@
 - If a user input exists while adding a new resource, [filterTableRows](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L214) is invoked
 - Returns: undefined (side effects only)
 
+# deleteResource.js
+
+`deleteResource` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/7c07a5d94f20ead2972552359d80f77a79027279/client/assets/js/deleteResource.js#L1)
+- Function
+- Deletes a resource
+- Params: click event
+- Returns: undefined (side effects only)
+- DELETE request to delete resource
+  - Invokes: [handleErrors](https://github.com/WarrenMfg/engineering-journal/blob/9f8a82d8183e38c19eff33a6903ea88d3199a2d2/client/assets/js/utils.js#L10) if errors, otherwise [removeRow](https://github.com/WarrenMfg/engineering-journal/blob/7c07a5d94f20ead2972552359d80f77a79027279/client/assets/js/deleteResource.js#L41) (see below)
+
+`removeRow` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/7c07a5d94f20ead2972552359d80f77a79027279/client/assets/js/deleteResource.js#L41)
+- Function
+- Removes a table row after deleting a resource
+- Params: id: string
+- Returns: undefined (side effects only)
+
 ***
 
 **Note**: See the [Engineering Journal API](https://github.com/WarrenMfg/engineering-journal-api) repo to integrate.

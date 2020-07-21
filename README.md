@@ -74,6 +74,13 @@
 - Params: input event
 - Returns: undefined (side effects only)
 
+# search.js
+
+`searchModal` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/784a7214d5eac5e528dc1bc18c8ab4de703e9613/client/assets/js/search.js#L1)
+- Function
+- Decorates [search modal](https://github.com/WarrenMfg/engineering-journal/blob/784a7214d5eac5e528dc1bc18c8ab4de703e9613/client/topic.html#L142) with event listeners
+- Invoked in: [onload.js IIFE](https://github.com/WarrenMfg/engineering-journal/blob/784a7214d5eac5e528dc1bc18c8ab4de703e9613/client/assets/js/onload.js#L90)
+
 ***
 
 **Note**: See the [Engineering Journal API](https://github.com/WarrenMfg/engineering-journal-api) repo to integrate.

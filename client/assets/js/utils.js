@@ -1,3 +1,5 @@
+// test
+
 // DOMPurify
 DOMPurify.setConfig({ ALLOWED_TAGS: [] });
 

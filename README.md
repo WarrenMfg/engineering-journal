@@ -74,13 +74,6 @@
 - Params: input event
 - Returns: undefined (side effects only)
 
-# search.js
-
-`searchModal` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/784a7214d5eac5e528dc1bc18c8ab4de703e9613/client/assets/js/search.js#L1)
-- Function
-- Decorates [search modal](https://github.com/WarrenMfg/engineering-journal/blob/784a7214d5eac5e528dc1bc18c8ab4de703e9613/client/topic.html#L142) with event listeners
-- Invoked in: [onload.js IIFE](https://github.com/WarrenMfg/engineering-journal/blob/784a7214d5eac5e528dc1bc18c8ab4de703e9613/client/assets/js/onload.js#L90)
-
 # onload.js
 
 `$.ajax` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/9765c3f4bb2fb11af5fe907bfef647d11d31e341/client/assets/js/onload.js#L10)
@@ -224,18 +217,20 @@
 - Immediately Invoked Function Expression
 - Queries localStorage for topic name and updates `title`, `meta`, and `h1` elements
 
+# updatePassword.js
 
-
+`#update-password` [🔗](https://github.com/WarrenMfg/engineering-journal/blob/acc2421fd03be93885a7c6959d9d1532f90c0f2f/client/assets/js/updatePassword.js#L1)
+- Keydown event listener for Enter key
+- Updates password
+- Used for internal development purposes only
 
 ***
 
-**Note**: See the [Engineering Journal API](https://github.com/WarrenMfg/engineering-journal-api) repo to integrate.
-
 ## Roadmap
 
-- Consolidate this Engineering Journal repo and the Engineering Journal API repo into single repo
+- Consolidate this Engineering Journal repo and the [Engineering Journal API](https://github.com/WarrenMfg/engineering-journal-api) repo into single repo
 - Add OAuth
-- Update codebase with documenation
+- Update API codebase with documenation
 - Convert to React single-page application
 
 ## License

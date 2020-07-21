@@ -1,6 +1,6 @@
 # Engineering Journal
 
-**Consolidate and organize bookmarks from browsers and scattered links collected in reading lists, note apps, docs, and spreadsheets.**
+Consolidate and organize bookmarks from browsers and links collected in reading lists, note apps, docs, and spreadsheets.
 
 ***
 

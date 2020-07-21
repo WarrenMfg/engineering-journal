@@ -1,8 +1,13 @@
 # Engineering Journal
 
-**Consolidate and organize bookmarks from browsers and scattered links collected in reading lists, note apps, docs, and spreadsheets.**
+Consolidate and organize bookmarks from browsers and links collected in reading lists, note apps, docs, and spreadsheets.
+
+## Docs on GitHub Pages
+[Docs](https://warrenmfg.github.io/engineering-journal/)
 
 ![index.html](gifs/index.png)
+
+***
 
 ## How to Use
 
@@ -10,10 +15,14 @@ Static `.html` files exist for HTML, CSS, JavaScript, and the MERN stack: MongoD
 
 ![CSS](gifs/css.gif)
 
+***
+
 But a generic `topic.html` file exists as a template for custom topics, with full CRUD capabilities:
 
 ![Add topic](gifs/add-topic.gif)
 ![Edit topic name](gifs/edit-topic-name.gif)
+
+***
 
 As well as full CRUD capabilities on each resource on all topics:
 
@@ -21,13 +30,11 @@ As well as full CRUD capabilities on each resource on all topics:
 
 ***
 
-**Note**: See the [Engineering Journal API](https://github.com/WarrenMfg/engineering-journal-api) repo to integrate.
-
 ## Roadmap
 
-- Consolidate this Engineering Journal repo and the Engineering Journal API repo into single repo
+- Consolidate this Engineering Journal repo and the [Engineering Journal API](https://github.com/WarrenMfg/engineering-journal-api) repo into single repo
 - Add OAuth
-- Update codebase with documenation
+- Update API codebase with documenation
 - Convert to React single-page application
 
 ## License

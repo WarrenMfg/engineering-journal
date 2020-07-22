@@ -42,6 +42,9 @@ $(function() {
     let pinOrder;
     let pins = [];
 
+    // build html string for unpinned resources
+    let unpinnedHTML = '';
+
     // make table rows and pins
     resources.forEach(resource => {
       // if meta, keep pins as pinOrder
@@ -54,32 +57,38 @@ $(function() {
 
         // else append to tbody
       } else {
-        tbody.append(
-          tableRow(
-            '',
-            resource.createdAt,
-            resource.description,
-            resource.keywords,
-            resource.link,
-            resource._id
-          )
+        unpinnedHTML += tableRow(
+          '',
+          resource.createdAt,
+          resource.description,
+          resource.keywords,
+          resource.link,
+          resource._id
         );
       }
     });
 
-    if (pinOrder) prependToTable(tbody, pinOrder, pins);
+    if (pinOrder) prependToTable(tbody, pinOrder, pins, unpinnedHTML);
+    else tbody.append(unpinnedHTML);
   };
 
-  const prependToTable = (tbody, pinOrder, pins) => {
+  const prependToTable = (tbody, pinOrder, pins, unpinnedHTML = '') => {
     tbody.prepend(() => {
-      let html;
+      let pinnedHTML;
       // iterate through pinOrder array to find in pins array
       pinOrder.forEach(id => {
         const pin = pins.find(obj => obj._id === id);
-        html += tableRow('pin', pin.createdAt, pin.description, pin.keywords, pin.link, pin._id);
+        pinnedHTML += tableRow(
+          'pin',
+          pin.createdAt,
+          pin.description,
+          pin.keywords,
+          pin.link,
+          pin._id
+        );
       });
-      // return HTML string
-      return html;
+      // return HTML strings
+      return pinnedHTML + unpinnedHTML;
     });
   };
 

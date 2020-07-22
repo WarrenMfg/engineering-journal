@@ -75,20 +75,22 @@ const populateDropdownMenu = (namespaces, collection) => {
   // default topics
   const defaults = [ 'CSS', 'Express', 'HTML', 'JavaScript', 'MongoDB', 'Node', 'React' ];
 
+  // build html string for dropdownMenu
+  let dropdownHTML = '';
+
   // add to dropdown menu
   namespaces.forEach(ns => {
     if (defaults.includes(ns)) {
-      dropdownMenu.append(
-        `<a class="dropdown-item ${ns === collection &&
-          'active white'}" role="presentation" href="${ns.toLowerCase()}.html">${ns}</a>`
-      );
+      dropdownHTML += `<a class="dropdown-item ${ns === collection &&
+        'active white'}" role="presentation" href="${ns.toLowerCase()}.html">${ns}</a>`;
     } else {
-      dropdownMenu.append(
-        `<a class="dropdown-item ${ns === collection &&
-          'active white'}" role="presentation" href="topic.html">${ns}</a>`
-      );
+      dropdownHTML += `<a class="dropdown-item ${ns === collection &&
+        'active white'}" role="presentation" href="topic.html">${ns}</a>`;
     }
   });
+
+  // append html string to dropdownMenu
+  dropdownMenu.append(dropdownHTML);
 
   return namespaces;
 };
@@ -100,14 +102,20 @@ const populateEditTopic = (sortedNamespaces, collection) => {
   // empty select element
   topicSelect.children().remove();
 
+  // build html string for topicSelect
+  let topicSelectHTML = '';
+
   // add to select element
   sortedNamespaces.forEach(ns => {
     if (ns === collection) {
-      topicSelect.append(`<option value=${ns} selected>${ns}</option>`);
+      topicSelectHTML += `<option value=${ns} selected>${ns}</option>`;
     } else {
-      topicSelect.append(`<option value=${ns}>${ns}</option>`);
+      topicSelectHTML += `<option value=${ns}>${ns}</option>`;
     }
   });
+
+  // append html string to topicSelect
+  topicSelect.append(topicSelectHTML);
 };
 
 // validate resource inputs

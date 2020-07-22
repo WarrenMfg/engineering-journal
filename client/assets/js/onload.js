@@ -68,8 +68,13 @@ $(function() {
       }
     });
 
-    if (pinOrder) prependToTable(tbody, pinOrder, pins, unpinnedHTML);
-    else tbody.append(unpinnedHTML);
+    // if pinned resources, pass in unpinned resources too; then append to tbody
+    if (pinOrder.length) {
+      prependToTable(tbody, pinOrder, pins, unpinnedHTML);
+      return;
+    }
+    // otherwise, if unpinned resources, then append to tbody
+    if (unpinnedHTML) tbody.append(unpinnedHTML);
   };
 
   const prependToTable = (tbody, pinOrder, pins, unpinnedHTML = '') => {

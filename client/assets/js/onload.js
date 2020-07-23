@@ -312,7 +312,7 @@ $(function() {
   };
 
   // add filter event listener
-  filterInput.on('input', debounce(filterTableRows, 300));
+  filterInput.on('input', debounce(filterTableRows, 250));
 
   /* END FILTER EVENT LISTENERS */
 });

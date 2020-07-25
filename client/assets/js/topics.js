@@ -155,9 +155,6 @@
     // if no change
     if (sanitized === DOMPurify.sanitize(localStorage.getItem('topic').trim())) return;
 
-    // ensure trimmed input is inserted back into DOM
-    collectionH1.text(sanitized);
-
     // toggle progress cursor and masking div on
     $('#mask').toggle();
 
@@ -190,6 +187,9 @@
       complete: () => {
         // toggle progress cursor and masking div off
         $('#mask').toggle();
+
+        // update h1 and meta data
+        topicCollection();
       }
     });
   });

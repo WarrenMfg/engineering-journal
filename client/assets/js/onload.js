@@ -285,8 +285,15 @@ $(function() {
   });
 
   // #error-feedback event listener (at top of page)
-  $('#error-feedback').on('click', e => {
-    $(e.target).closest('#error-feedback').css('display', 'none');
+  $('#error-feedback').on('click', function() {
+    // clear timeout
+    clearTimeout(timeoutID);
+    // remove/stop animation
+    $(this).stop(true, false);
+    // toggle visibility
+    $(this).toggle();
+    // remove paragraph feedback
+    $(this).children().first().empty();
   });
 
   /* END TABLE & ERROR FEEDBACK EVENT LISTENERS */

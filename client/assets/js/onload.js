@@ -39,7 +39,7 @@ $(function() {
   const appendToTable = resources => {
     // query tbody
     const tbody = $('tbody');
-    let pinOrder;
+    let pinOrder = [];
     let pins = [];
 
     // build html string for unpinned resources

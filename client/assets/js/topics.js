@@ -6,10 +6,12 @@
 
   // add event listern to topic.html links
   dropdownMenu.on('click', 'a[href="topic.html"]', e => {
-    // localStorage is used to handoff collection name
-    // so that topicCollection.js can use it to populate h1.page-title in topic.html
-    // then onload.js uses h1.page-title to fetch collection
-    localStorage.setItem('topic', e.target.innerText.trim());
+    // add query string for collection name and navigate to page
+
+    e.target.href = 'javascript:void(0)';
+    window.location.assign(
+      `${window.location.origin}/topic.html?collection=${e.target.innerText.trim()}`
+    );
   });
 
   // query add topic from dropdown menu
@@ -41,8 +43,20 @@
   // add Enter event listener
   newTopicName.on('keydown', e => {
     if (e.key === 'Enter') {
-      // sanitize
-      const sanitized = DOMPurify.sanitize(e.target.value.trim());
+      // sanitize and remove extra spaces between words
+      const sanitized = DOMPurify.sanitize(
+        e.target.value
+          .split(' ')
+          .reduce((acc, val) => {
+            val = val.trim();
+            if (val) {
+              acc.push(val);
+            }
+            return acc;
+          }, [])
+          .join(' ')
+      );
+
       // if no sanitized input, return
       if (!sanitized) return newTopicName.blur();
 
@@ -107,7 +121,7 @@
     $.ajax({
       url: `${API_URL}/api/collection/${DOMPurify.sanitize(
         localStorage.getItem('password').trim()
-      )}/${DOMPurify.sanitize(localStorage.getItem('topic').trim())}`,
+      )}/${DOMPurify.sanitize(getURLcollection())}`,
       type: 'DELETE',
       dataType: 'json',
       success: data => {
@@ -121,7 +135,6 @@
         handleErrors('Sorry, an error has occurred.');
       },
       complete: () => {
-        localStorage.removeItem('topic');
         // replace current page with index.html
         const href = window.location.href.split('/');
         href.splice(-1, 1, 'index.html');
@@ -147,13 +160,32 @@
     e.target.contentEditable = true;
 
     // sanitize input
-    const sanitized = DOMPurify.sanitize(e.target.innerText.trim());
+    const sanitized = DOMPurify.sanitize(
+      e.target.innerText
+        .split(' ')
+        .reduce((acc, val) => {
+          val = val.trim();
+          if (val) {
+            acc.push(val);
+          }
+          return acc;
+        }, [])
+        .join(' ')
+    );
+
     if (!sanitized) {
-      collectionH1.text(DOMPurify.sanitize(localStorage.getItem('topic').trim()));
+      // return to original
+      collectionH1.text(DOMPurify.sanitize(getURLcollection()));
       return handleErrors('Please enter a valid topic.');
+    } else {
+      // else update h1
+      collectionH1.text(sanitized);
     }
+
     // if no change
-    if (sanitized === DOMPurify.sanitize(localStorage.getItem('topic').trim())) return;
+    if (sanitized === DOMPurify.sanitize(getURLcollection())) {
+      return;
+    }
 
     // toggle progress cursor and masking div on
     $('#mask').toggle();
@@ -162,7 +194,7 @@
     $.ajax({
       url: `${API_URL}/api/collection/${DOMPurify.sanitize(
         localStorage.getItem('password').trim()
-      )}/${DOMPurify.sanitize(localStorage.getItem('topic').trim())}/${sanitized}`,
+      )}/${DOMPurify.sanitize(getURLcollection())}/${sanitized}`,
       type: 'PUT',
       dataType: 'json',
       success: data => {
@@ -171,25 +203,28 @@
           return handleErrors('Sorry, an error has occurred.');
         }
 
-        // update localStorage
-        localStorage.setItem('topic', data.updatedCollection);
-
-        // update dropdown menu with all collections
-        const sortedNamespaces = populateDropdownMenu(data.namespaces, data.updatedCollection);
-        populateEditTopic(sortedNamespaces, data.updatedCollection);
+        // update url (performs a refresh, but removes previous url from browser history)
+        window.location.replace(
+          `${window.location.origin}/topic.html?collection=${data.updatedCollection}`
+        );
       },
       error: (xhr, errorType, exception) => {
         // log error
         console.log('addResource error:', xhr, errorType, exception);
-        // handle error
-        handleErrors('Sorry, an error has occurred.');
-      },
-      complete: () => {
+
+        if (xhr.status === 409) {
+          // handle error
+          handleErrors('Topic already exists.');
+        } else {
+          // handle error
+          handleErrors('Sorry, an error has occurred.');
+        }
+
+        // revert H1 text
+        collectionH1.text(DOMPurify.sanitize(getURLcollection()));
+
         // toggle progress cursor and masking div off
         $('#mask').toggle();
-
-        // update h1 and meta data
-        topicCollection();
       }
     });
   });

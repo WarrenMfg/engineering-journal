@@ -190,6 +190,9 @@ const getHost = link => {
   }
 };
 
+const getURLcollection = () =>
+  decodeURI(window.location.search.split('?collection=').slice(1).join('').trim());
+
 const tableRow = (className = '', createdAt, description, keywords, link, _id) => `
   <tr class="${className}" data-createdat=${createdAt}>
     <td>${description}</td>

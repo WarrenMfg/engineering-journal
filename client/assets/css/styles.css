@@ -119,6 +119,15 @@ footer p {
   z-index: 1100;
 }
 
+.references p {
+  padding-left: 3rem;
+  text-indent: -3rem;
+}
+
+.references .italic {
+  font-style: italic;
+}
+
 @media (min-width: 768px) {
   .navbar-expand-md .navbar-nav .dropdown-menu {
     text-align: left;

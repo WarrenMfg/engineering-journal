@@ -6,12 +6,13 @@
 
   // add event listern to topic.html links
   dropdownMenu.on('click', 'a[href="topic.html"]', e => {
-    // add query string for collection name and navigate to page
-
+    // void target href
     e.target.href = 'javascript:void(0)';
-    window.location.assign(
-      `${window.location.origin}/topic.html?collection=${e.target.innerText.trim()}`
-    );
+
+    // add query string for collection name and navigate to page
+    const href = window.location.href.split('/');
+    href.splice(-1, 1, `topic.html?collection=${e.target.innerText.trim()}`);
+    window.location.assign(href.join('/'));
   });
 
   // query add topic from dropdown menu
@@ -204,9 +205,9 @@
         }
 
         // update url (performs a refresh, but removes previous url from browser history)
-        window.location.replace(
-          `${window.location.origin}/topic.html?collection=${data.updatedCollection}`
-        );
+        const href = window.location.href.split('/');
+        href.splice(-1, 1, `topic.html?collection=${data.updatedCollection}`);
+        window.location.replace(href.join('/'));
       },
       error: (xhr, errorType, exception) => {
         // log error

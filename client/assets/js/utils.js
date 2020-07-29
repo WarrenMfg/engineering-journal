@@ -96,7 +96,7 @@ const populateDropdownMenu = (namespaces, collection) => {
 };
 
 // add namespaces to select element
-const populateEditTopic = (sortedNamespaces, collection) => {
+const populateEditTopic = sortedNamespaces => {
   // query select element
   const topicSelect = $('#topic-select');
   // empty select element
@@ -107,11 +107,7 @@ const populateEditTopic = (sortedNamespaces, collection) => {
 
   // add to select element
   sortedNamespaces.forEach(ns => {
-    if (ns === collection) {
-      topicSelectHTML += `<option value=${ns} selected>${ns}</option>`;
-    } else {
-      topicSelectHTML += `<option value=${ns}>${ns}</option>`;
-    }
+    topicSelectHTML += `<option value=${ns}>${ns}</option>`;
   });
 
   // append html string to topicSelect

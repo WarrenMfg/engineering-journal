@@ -15,7 +15,7 @@ $(function() {
     dataType: 'json',
     success: data => {
       const sortedNamespaces = populateDropdownMenu(data.namespaces, collectionH1text);
-      populateEditTopic(sortedNamespaces, collectionH1text);
+      populateEditTopic(sortedNamespaces);
 
       // if no results, handle errors / provide feedback
       if (!data.docs.length) return handleErrors('No resources yet.');
@@ -166,6 +166,16 @@ $(function() {
     editModal.find('button[type=submit]').attr('data-id', e.target.id);
     // add resource _id to edit modal delete button (needed in deleteResource.js)
     editModal.find('.modal-footer button').attr('data-id', e.target.id);
+
+    // make current topic the selected option
+    const selectElement = editModal.find('#topic-select');
+    const topic = $('h1.page-title').text();
+    selectElement.children().each((i, option) => {
+      if (option.value === topic) {
+        selectElement[0].selectedIndex = i;
+        return false;
+      }
+    });
 
     // get resource row
     const tableRow = $(e.target).closest('tr');

@@ -1,6 +1,6 @@
 # Engineering Journal
 
-Consolidate and organize bookmarks from browsers and links collected in reading lists, note apps, docs, and spreadsheets.
+Consolidate and organize browser bookmarks and links stashed throughout reading lists, note apps, docs, and spreadsheets.
 
 ## Docs on GitHub Pages
 [Docs](https://warrenmfg.github.io/engineering-journal/)

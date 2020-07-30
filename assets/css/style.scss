@@ -6,3 +6,7 @@
 section li {
   list-style-type: circle;
 }
+
+li ul {
+  margin-bottom: 0;
+}
